@@ -1,10 +1,12 @@
 import React from 'react';
 import {NavLink,useHistory} from 'react-router-dom';
+import {Category} from '../components/Category';
 
 const Money:React.FC = () => {
-  const history = useHistory()
   return (
-      <div>Money</div>
+      <div>
+        <Category/>
+      </div>
   )
 }
 
