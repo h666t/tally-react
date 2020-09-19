@@ -1,4 +1,5 @@
 @import-normalize;
+@import "helper";
 * {
   margin: 0;
   padding: 0;
@@ -15,4 +16,10 @@ ol,ul{
 
 button,input{
   font: inherit;
+}
+
+body{
+  font-size: $hei;
+  line-height: 1.2;
+  background:#F5F4F9 ;
 }
