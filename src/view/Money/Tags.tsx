@@ -7,6 +7,9 @@ const TagList = styled.div`
     background: white;
     padding: 15px;
     overflow: auto;
+    display: flex;
+    justify-content: center;
+    
     > div{
       margin-left: -10px;
       >span{
@@ -23,7 +26,6 @@ const TagList = styled.div`
           transform: translateY(-50%);
         }
       }
-    
     }
 `
 
