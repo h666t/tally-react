@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Icon} from './Icon';
+import {useHistory} from 'react-router-dom'
 
 const CategorySelection = styled.section`
     display: flex;
-    justify-content: center;
     align-items: center;
     font-size: 18px;
     line-height: 50px;
+    justify-content: space-between;
     
-    span:nth-child(1){
+    > div{
+     span:nth-child(1){
       height: 62px;
       margin-right: 5px;
       position: relative;
@@ -17,7 +19,7 @@ const CategorySelection = styled.section`
       &:after{
         position: absolute;
         left: 0;
-        bottom:10px;
+        bottom:0;
         width: 100%;
         content: '';
         border-bottom: 3px solid black;
@@ -26,14 +28,33 @@ const CategorySelection = styled.section`
     span:nth-child(2){
       margin-left: 5px;
     }
+    }
+    
+    > .category-left{
+      border:1px solid red;
+      width: 20px;
+      height: 20px;
+      margin-left: 20px;
+    }
+   
+`
+
+const Square = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
 `
 
 const Category:React.FC = ()=>{
+  const history = useHistory()
   return (
     <CategorySelection>
-      <Icon id={'#left'}/>
-      <span>支出</span>
-      <span>收入</span>
+      <Icon id={'#left'} prefix={'category-left'} onClick={()=>{history.push('/')}} />
+      <div>
+        <span>支出</span>
+        <span>收入</span>
+      </div>
+      <Square/>
     </CategorySelection>
   )
 }

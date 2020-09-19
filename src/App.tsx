@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import {NotFound} from './view/NotFound';
 
 const App:React.FC = ()=>{
   return (
@@ -17,6 +18,9 @@ const App:React.FC = ()=>{
           </Route>
           <Route exact path="/Money">
             <Money/>
+          </Route>
+          <Route  path="/*">
+            <NotFound/>
           </Route>
         </Switch>
       </Router>

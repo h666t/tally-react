@@ -1,7 +1,8 @@
 import React from 'react';
-
+import classNames from 'classnames';
 type Props = {
   id: string
+  prefix: string
 } & React.SVGAttributes<SVGElement>
 
 const Icon:React.FC<Props> = (props)=>{
@@ -11,9 +12,9 @@ const Icon:React.FC<Props> = (props)=>{
   } catch (e) {
     console.log(e);
   }
-  const {id,children,...rest} = props
+  const {id,prefix,children,className,...rest} = props
   return (
-    <svg {...rest} >
+    <svg  className={classNames('icon',`${props.prefix}`)} {...rest} >
       <use xlinkHref={id}/>
     </svg>
   )
