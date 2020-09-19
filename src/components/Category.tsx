@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Icon} from './Icon';
 
 const CategorySelection = styled.section`
     display: flex;
@@ -30,6 +31,7 @@ const CategorySelection = styled.section`
 const Category:React.FC = ()=>{
   return (
     <CategorySelection>
+      <Icon id={'#left'}/>
       <span>支出</span>
       <span>收入</span>
     </CategorySelection>
