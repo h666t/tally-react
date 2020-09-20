@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {NavLink,useHistory} from 'react-router-dom';
 import {Category} from '../components/Category';
 import {Tags} from './Money/Tags';
-import {NumberPad} from './Money/NumberPad';
 import styled from 'styled-components';
-import {TypeTagsItem} from '../hook/useTags';
 import {useDataSource} from '../hook/useDataSource';
+import {Calculator} from './Money/Calculator';
 
 const MoneyWrapper = styled.div`
     display: flex;
@@ -25,7 +23,7 @@ const Money:React.FC = () => {
           <Tags beSelectedTags={dataSourceItem.tags}
                 onClick={setBeSelectedTags}/>
         </div>
-        <NumberPad />
+        <Calculator/>
       </MoneyWrapper>
   )
 }

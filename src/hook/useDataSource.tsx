@@ -12,11 +12,11 @@ const useDataSource = ()=>{
   // TODO 点击OK后也要重置
 
   const [dataSourceItem,setDataSourceItem] = useState<DataSourceItem>({
-    category:'-',tags:[],date:'',amount:'',note:''
+    category:'-',tags:[],date:'',amount:'0',note:''
   })
 
   useEffect(()=>{
-    setDataSourceItem({category:'-',tags:[],date:`${dayjs().format('YYYY-MM-DD')}`,amount:'',note:''})
+    setDataSourceItem({category:'-',tags:[],date:`${dayjs().format('YYYY-MM-DD')}`,amount:'0',note:''})
   },[])
 
   const setCategory = ()=>{
@@ -40,7 +40,11 @@ const useDataSource = ()=>{
     setDataSourceItem({...dataSourceItem,note:note})
   }
 
-  return {dataSourceItem,setCategory,setBeSelectedTags,setDate,setNote}
+  const setAmount = (amount:string)=>{
+    setDataSourceItem({...dataSourceItem,amount:amount})
+  }
+
+  return {dataSourceItem,setCategory,setBeSelectedTags,setDate,setNote,setAmount}
 }
 
 export {useDataSource}
