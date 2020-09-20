@@ -17,13 +17,6 @@ const MoneyWrapper = styled.div`
 const Money:React.FC = () => {
   const {dataSourceItem,setCategory,setBeSelectedTags} = useDataSource()
   const [date,setDate] = useState<string>('')
-  const changeCategory=()=>{
-    if (dataSourceItem.category==='-'){
-      setCategory('+')
-    }else {
-      setCategory('-')
-    }
-  }
   const changeBeSelectedTags = (id:number)=>{
     const index = dataSourceItem.tags.indexOf(id)
     if (index<0){
@@ -41,7 +34,7 @@ const Money:React.FC = () => {
       <MoneyWrapper>
         <div>
           <Category category={dataSourceItem.category}
-                    onClick={changeCategory}
+                    onClick={setCategory}
           />
           <Tags beSelectedTags={dataSourceItem.tags}
                 onClick={changeBeSelectedTags}/>

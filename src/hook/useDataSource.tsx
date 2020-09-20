@@ -16,8 +16,9 @@ const useDataSource = ()=>{
     setDataSourceItem({category:'-',tags:[],date:'',amount:'',note:''})
   },[])
 
-  const setCategory = (category:'+'|'-')=>{
-    setDataSourceItem({...dataSourceItem,category:category})
+  const setCategory = ()=>{
+    dataSourceItem.category === '-' ? setDataSourceItem({...dataSourceItem,category:'+'})
+                                    : setDataSourceItem({...dataSourceItem,category:'-'})
   }
 
   const setBeSelectedTags = (idArray:number[])=>{
