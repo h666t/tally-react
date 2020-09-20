@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import dayjs from 'dayjs';
 
 type DataSourceItem = {
   category: '+'|'-'
@@ -13,8 +14,9 @@ const useDataSource = ()=>{
   const [dataSourceItem,setDataSourceItem] = useState<DataSourceItem>({
     category:'-',tags:[],date:'',amount:'',note:''
   })
+
   useEffect(()=>{
-    setDataSourceItem({category:'-',tags:[],date:'',amount:'',note:''})
+    setDataSourceItem({category:'-',tags:[],date:`${dayjs().format('YYYY-MM-DD')}`,amount:'',note:''})
   },[])
 
   const setCategory = ()=>{
@@ -28,8 +30,13 @@ const useDataSource = ()=>{
             : setDataSourceItem({...dataSourceItem,tags:dataSourceItem.tags.filter(item=>item!==id)})
     }
 
+  const setDate = (date:string)=>{
+    if (date !== dataSourceItem.date){
+      setDataSourceItem({...dataSourceItem,date:date})
+    }
+  }
 
-  return {dataSourceItem,setCategory,setBeSelectedTags}
+  return {dataSourceItem,setCategory,setBeSelectedTags,setDate}
 }
 
 export {useDataSource}

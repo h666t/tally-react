@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
+import {useDataSource} from '../../hook/useDataSource';
 
 const DateWrapper = styled.div`
       display: flex;
@@ -12,10 +13,19 @@ const DateWrapper = styled.div`
 
 
 const Date:React.FC = ()=>{
+  const {dataSourceItem,setDate} = useDataSource()
+  const ref1 = useRef(null)
+
   return (
     <DateWrapper>
       <span>日期：</span>
-      <input type={'date'} defaultValue={'2020-09-10'}/>
+      <input ref={ref1}
+             type={'date'}
+             defaultValue={`${dataSourceItem.date}`}
+             onChange={()=>{
+               setDate((ref1.current! as HTMLInputElement).value)
+             }}
+      />
     </DateWrapper>
   )
 }

@@ -16,12 +16,6 @@ const MoneyWrapper = styled.div`
 
 const Money:React.FC = () => {
   const {dataSourceItem,setCategory,setBeSelectedTags} = useDataSource()
-  const [date,setDate] = useState<string>('')
-
-
-  const changeDate= (date: string)=>{
-    setDate(date)
-  }
   return (
       <MoneyWrapper>
         <div>
