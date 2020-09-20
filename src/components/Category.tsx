@@ -9,6 +9,7 @@ const CategorySelection = styled.section`
     font-size: 18px;
     line-height: 50px;
     justify-content: space-between;
+    background: #ebeff2;
     
     > div{
      span:nth-child(1){
@@ -31,7 +32,6 @@ const CategorySelection = styled.section`
     }
     
     > .category-left{
-      border:1px solid red;
       width: 20px;
       height: 20px;
       margin-left: 20px;
