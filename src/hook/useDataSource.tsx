@@ -36,7 +36,11 @@ const useDataSource = ()=>{
     }
   }
 
-  return {dataSourceItem,setCategory,setBeSelectedTags,setDate}
+  const setNote = (note:string)=>{
+    setDataSourceItem({...dataSourceItem,note:note})
+  }
+
+  return {dataSourceItem,setCategory,setBeSelectedTags,setDate,setNote}
 }
 
 export {useDataSource}

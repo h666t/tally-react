@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import styled from 'styled-components';
+import {useDataSource} from '../../hook/useDataSource';
 
 const NoteWrapper = styled.label`
      display: flex;
@@ -19,10 +20,17 @@ const NoteWrapper = styled.label`
 `
 
 const Note:React.FC = ()=>{
+  const {setNote,dataSourceItem} = useDataSource()
+
  return (
    <NoteWrapper>
      <span>备注：</span>
-     <input type="text" placeholder={'写点备注吧...'}/>
+     <input type="text" placeholder={'写点备注吧...'}
+            defaultValue={''}
+            onChange={(e)=>{
+              setNote(e.target.value)
+            }}
+     />
    </NoteWrapper>
  )
 }
