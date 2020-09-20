@@ -17,7 +17,14 @@ const CategorySelection = styled.section`
       margin-right: 5px;
       position: relative;
       padding: 5px;
-      &:after{
+    }
+    span:nth-child(2){
+      height: 62px;
+      margin-right: 5px;
+      position: relative;
+      padding: 5px;
+    }
+    .selected:after{
         position: absolute;
         left: 0;
         bottom:0;
@@ -25,10 +32,6 @@ const CategorySelection = styled.section`
         content: '';
         border-bottom: 3px solid black;
       }
-    }
-    span:nth-child(2){
-      margin-left: 5px;
-    }
     }
     
     > .category-left{
@@ -44,15 +47,22 @@ const Square = styled.div`
   height: 20px;
   margin-right: 20px;
 `
+type Props = {
+  category: '+'|'-'
+  onClick:()=>void
+}
 
-const Category:React.FC = ()=>{
+const Category:React.FC<Props> = (props)=>{
+  const {children,onClick,category} = props
   const history = useHistory()
   return (
     <CategorySelection>
       <Icon id={'#left'} prefix={'category-left'} onClick={()=>{history.push('/')}} />
       <div>
-        <span>支出</span>
-        <span>收入</span>
+        <span className={category==='-'?'selected':''}
+              onClick={onClick}>支出</span>
+        <span className={category==='+'?'selected':''}
+              onClick={onClick}>收入</span>
       </div>
       <Square/>
     </CategorySelection>

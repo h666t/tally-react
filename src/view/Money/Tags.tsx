@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
+import {TypeTagsItem, useTags} from '../../hook/useTags';
 
 const TagList = styled.div`
     height: 160px;
@@ -8,45 +9,66 @@ const TagList = styled.div`
     padding: 15px;
     overflow: auto;
     display: flex;
-    justify-content: center;
-    
     > div{
-      margin-left: -10px;
-      >span{
-        padding: 5px 15px;
-        margin-left: 10px;
-        line-height: 40px;
-        position: relative;
-        display: inline-block;
-        .setting{
-        position: absolute;
-          height: 30px;
-          width: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
+          margin: 0 -12px;
+          padding: 0 4px;
+      >div{
+            background: #D9D9D9;
+            display: inline-block;
+            padding: 3px 18px;
+            font-size: 14px; 
+            margin: 8px 12px;
+            border-radius: 18px;
+      }
+      > .settingWrapper{
+            background: white;
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 14px; 
+            margin: 8px 10px;
+            position: relative;
+            >.setting{
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top:0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+      }
+        
+      >.selected{
+          background: #333333;
+          color: white;
+          border-radius: 15px;
       }
     }
 `
 
-const Tags:React.FC = ()=>{
+type Props = {
+  beSelectedTags:number[]
+  onClick : (id:number)=>void
+}
+
+const Tags:React.FC<Props> = (props)=>{
+  const {beSelectedTags,onClick} = props
+  const {tags} = useTags()
   return (
     <TagList>
-        <div>
-            <span>衣aaaaaaaaaaaa</span>
-            <span>食</span>
-            <span>住</span>
-            <span>行</span>
-            <span>衣</span>
-            <span>食</span>
-            <span>住</span>
-            <span>行</span>
-          <span>住</span>
-          <span>
-            <Icon id={'#setting'} prefix={'setting'}/>
-          </span>
-
+      <div>
+        {tags.map(item=>
+          <div key={item.id}
+                onClick={()=>{onClick(item.id)}}
+                className={beSelectedTags.indexOf(item.id)>=0 ? 'selected' : ''}>
+              {item.name}
+            </div>
+        )}
+        <div className={'settingWrapper'}>
+          <Icon id={'#setting'} prefix={'setting'}/>
         </div>
+
+
+      </div>
 
     </TagList>
   )

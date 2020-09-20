@@ -10,11 +10,12 @@ const DateWrapper = styled.div`
       background: white;
 `
 
+
 const Date:React.FC = ()=>{
   return (
     <DateWrapper>
       <span>日期：</span>
-      <input type={'date'} value={'2020-09-10'}/>
+      <input type={'date'} defaultValue={'2020-09-10'}/>
     </DateWrapper>
   )
 }

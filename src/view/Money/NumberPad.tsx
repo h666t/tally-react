@@ -6,22 +6,18 @@ import {NumberPadOutput} from './NumberPadOutput';
 import {Note} from './Note';
 import {Calculator} from './Calculator';
 
-const NumberPadWrapper = styled.div`
-    > .numberPad{
-      
-    }
-`
+
 
 const NumberPad:React.FC = ()=>{
   return (
-    <NumberPadWrapper>
-      <Date/>
+    <div>
+      <Date  />
       <Line/>
       <NumberPadOutput/>
       <Line/>
       <Note/>
      <Calculator/>
-    </NumberPadWrapper>
+    </div>
   )
 }
 
