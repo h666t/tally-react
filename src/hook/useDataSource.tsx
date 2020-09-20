@@ -8,6 +8,7 @@ type DataSourceItem = {
   note: string
 }
 const useDataSource = ()=>{
+  // TODO 点击OK后也要重置
 
   const [dataSourceItem,setDataSourceItem] = useState<DataSourceItem>({
     category:'-',tags:[],date:'',amount:'',note:''
@@ -21,9 +22,12 @@ const useDataSource = ()=>{
                                     : setDataSourceItem({...dataSourceItem,category:'-'})
   }
 
-  const setBeSelectedTags = (idArray:number[])=>{
-    setDataSourceItem({...dataSourceItem,tags:idArray})
-  }
+  const setBeSelectedTags = (id:number)=>{
+    const index = dataSourceItem.tags.indexOf(id)
+    index<0 ? setDataSourceItem({...dataSourceItem,tags:[...dataSourceItem.tags,id]})
+            : setDataSourceItem({...dataSourceItem,tags:dataSourceItem.tags.filter(item=>item!==id)})
+    }
+
 
   return {dataSourceItem,setCategory,setBeSelectedTags}
 }

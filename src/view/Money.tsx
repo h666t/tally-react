@@ -17,15 +17,7 @@ const MoneyWrapper = styled.div`
 const Money:React.FC = () => {
   const {dataSourceItem,setCategory,setBeSelectedTags} = useDataSource()
   const [date,setDate] = useState<string>('')
-  const changeBeSelectedTags = (id:number)=>{
-    const index = dataSourceItem.tags.indexOf(id)
-    if (index<0){
-      setBeSelectedTags([...dataSourceItem.tags,id])
-    }
-    else {
-      setBeSelectedTags(dataSourceItem.tags.filter(item=>item!==id))
-    }
-  }
+
 
   const changeDate= (date: string)=>{
     setDate(date)
@@ -37,7 +29,7 @@ const Money:React.FC = () => {
                     onClick={setCategory}
           />
           <Tags beSelectedTags={dataSourceItem.tags}
-                onClick={changeBeSelectedTags}/>
+                onClick={setBeSelectedTags}/>
         </div>
         <NumberPad />
       </MoneyWrapper>
