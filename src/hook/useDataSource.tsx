@@ -1,50 +1,23 @@
 import {useEffect, useState} from 'react';
-import dayjs from 'dayjs';
+import {DataSourceItem} from './useDataSourceItem';
+import {useUpdate} from './useUpdate';
 
-type DataSourceItem = {
-  category: '+'|'-'
-  tags: number[]
-  date: string
-  amount: string
-  note: string
-}
 const useDataSource = ()=>{
-  // TODO 点击OK后也要重置
-
-  const [dataSourceItem,setDataSourceItem] = useState<DataSourceItem>({
-    category:'-',tags:[],date:'',amount:'0',note:''
-  })
+  const [dataSource,setDataSource] = useState<DataSourceItem[]>([])
 
   useEffect(()=>{
-    setDataSourceItem({category:'-',tags:[],date:`${dayjs().format('YYYY-MM-DD')}`,amount:'0',note:''})
+    setDataSource(
+      JSON.parse(window.localStorage.getItem('dataSource') || '[]')
+    )
   },[])
 
-  const setCategory = ()=>{
-    dataSourceItem.category === '-' ? setDataSourceItem({...dataSourceItem,category:'+'})
-                                    : setDataSourceItem({...dataSourceItem,category:'-'})
+  const save = (dataSource: DataSourceItem)=>{
+    const container = JSON.parse(window.localStorage.getItem('dataSource') || '[]')
+    container.push(dataSource)
+    setDataSource(container)
   }
 
-  const setBeSelectedTags = (id:number)=>{
-    const index = dataSourceItem.tags.indexOf(id)
-    index<0 ? setDataSourceItem({...dataSourceItem,tags:[...dataSourceItem.tags,id]})
-            : setDataSourceItem({...dataSourceItem,tags:dataSourceItem.tags.filter(item=>item!==id)})
-    }
-
-  const setDate = (date:string)=>{
-    if (date !== dataSourceItem.date){
-      setDataSourceItem({...dataSourceItem,date:date})
-    }
-  }
-
-  const setNote = (note:string)=>{
-    setDataSourceItem({...dataSourceItem,note:note})
-  }
-
-  const setAmount = (amount:string)=>{
-    setDataSourceItem({...dataSourceItem,amount:amount})
-  }
-
-  return {dataSourceItem,setCategory,setBeSelectedTags,setDate,setNote,setAmount}
+  return {dataSource,save}
 }
 
 export {useDataSource}

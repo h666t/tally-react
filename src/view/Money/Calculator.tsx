@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {useDataSource} from '../../hook/useDataSource';
+import {useDataSourceItem} from '../../hook/useDataSourceItem';
 import {generateOutput} from '../../lib/generateOutput';
 import {Line} from '../../components/Line';
 import {Note} from './Note';
@@ -35,10 +35,12 @@ const NumberPadOutputWrapper = styled.div`
       font-family: Consolas,monospace;
 `
 const Calculator:React.FC = ()=>{
-    const {setAmount,dataSourceItem} = useDataSource()
+    const {setAmount,dataSourceItem,saveDataSource} = useDataSourceItem()
+
   return (
     <div>
-        <Date  />
+        {dataSourceItem.category}
+        <Date/>
         <Line/>
         <NumberPadOutputWrapper>
             {dataSourceItem.amount}
@@ -46,8 +48,7 @@ const Calculator:React.FC = ()=>{
         <Line/>
         <Note/>
         <CalculatorWrapper onClick={(e)=>{
-            // console.log((e.target as HTMLDivElement).innerText);
-            generateOutput('2',setAmount)
+            generateOutput(`${(e.target as HTMLDivElement).innerText}`,setAmount)
         }}>
             <div>1</div>
             <div>2</div>
@@ -62,10 +63,10 @@ const Calculator:React.FC = ()=>{
             <div>9</div>
             <div>.</div>
             <div className={'zero'}>0</div>
-            <div className={'OK'}>OK</div>
+            <div className={'OK'}
+                 onClick={saveDataSource}>OK</div>
         </CalculatorWrapper>
     </div>
-
   )
 }
 

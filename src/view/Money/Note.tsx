@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {useDataSource} from '../../hook/useDataSource';
+import {useDataSourceItem} from '../../hook/useDataSourceItem';
 
 const NoteWrapper = styled.label`
      display: flex;
@@ -20,7 +20,7 @@ const NoteWrapper = styled.label`
 `
 
 const Note:React.FC = ()=>{
-  const {setNote,dataSourceItem} = useDataSource()
+  const {setNote,dataSourceItem} = useDataSourceItem()
 
  return (
    <NoteWrapper>
