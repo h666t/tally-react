@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Category} from '../components/Category';
 import {Tags} from './Money/Tags';
 import styled from 'styled-components';
-import {useDataSourceItem} from '../hook/useDataSourceItem';
 import {Calculator} from './Money/Calculator';
 
 const MoneyWrapper = styled.div`
@@ -13,15 +12,12 @@ const MoneyWrapper = styled.div`
 `
 
 const Money:React.FC = () => {
-  const {dataSourceItem,setCategory,setBeSelectedTags} = useDataSourceItem()
   return (
       <MoneyWrapper>
         <div>
-          <Category category={dataSourceItem.category}
-                    onClick={setCategory}
+          <Category
           />
-          <Tags beSelectedTags={dataSourceItem.tags}
-                onClick={setBeSelectedTags}/>
+          <Tags/>
         </div>
         <Calculator/>
       </MoneyWrapper>

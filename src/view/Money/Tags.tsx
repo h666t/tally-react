@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
 import {TypeTagsItem, useTags} from '../../hook/useTags';
+import {useSelectTags} from '../../hook/useSelectTags';
 
 const TagList = styled.div`
     height: 160px;
@@ -45,20 +46,16 @@ const TagList = styled.div`
     }
 `
 
-type Props = {
-  beSelectedTags:number[]
-  onClick : (id:number)=>void
-}
 
-const Tags:React.FC<Props> = (props)=>{
-  const {beSelectedTags,onClick} = props
+const Tags:React.FC = ()=>{
   const {tags} = useTags()
+  const {beSelectedTags,selectThisTag} = useSelectTags()
   return (
     <TagList>
       <div>
         {tags.map(item=>
           <div key={item.id}
-                onClick={()=>{onClick(item.id)}}
+                onClick={()=>{selectThisTag(item.id)}}
                 className={beSelectedTags.indexOf(item.id)>=0 ? 'selected' : ''}>
               {item.name}
             </div>
@@ -66,8 +63,6 @@ const Tags:React.FC<Props> = (props)=>{
         <div className={'settingWrapper'}>
           <Icon id={'#setting'} prefix={'setting'}/>
         </div>
-
-
       </div>
 
     </TagList>

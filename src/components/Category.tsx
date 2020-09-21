@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Icon} from './Icon';
 import {useHistory} from 'react-router-dom'
+import {useCategory} from '../hook/useCategory';
 
 const CategorySelection = styled.section`
     display: flex;
@@ -47,22 +48,19 @@ const Square = styled.div`
   height: 20px;
   margin-right: 20px;
 `
-type Props = {
-  category: '+'|'-'
-  onClick:()=>void
-}
 
-const Category:React.FC<Props> = (props)=>{
-  const {children,onClick,category} = props
+
+const Category:React.FC = ()=>{
+  const {category,setCategory,findCategory} = useCategory()
   const history = useHistory()
   return (
     <CategorySelection>
       <Icon id={'#left'} prefix={'category-left'} onClick={()=>{history.push('/')}} />
       <div>
         <span className={category==='-'?'selected':''}
-              onClick={onClick}>支出</span>
+              onClick={()=>{setCategory('-')}}>支出</span>
         <span className={category==='+'?'selected':''}
-              onClick={onClick}>收入</span>
+              onClick={()=>{setCategory('+')}}>收入</span>
       </div>
       <Square/>
     </CategorySelection>

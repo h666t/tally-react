@@ -37,11 +37,12 @@ const generateOutput = (value:string,setAmount:(amount:string)=>void) => {
       if (container[0]==='0'){
         container = '0.'
         setAmount(container)
+        return;
       }
       if (container.indexOf('.')>=0){
         return;
       }
-
+      setAmount(container += value)
   }
 }
 
