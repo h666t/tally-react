@@ -14,7 +14,10 @@ const useAmount = ()=>{
   const findAmount = ()=>{
     return JSON.parse(window.localStorage.getItem('amount') || '0')
   }
-  return {amount,setAmount,findAmount}
+  const initAmount = () => {
+    window.localStorage.setItem('amount','0')
+  }
+  return {amount,setAmount,findAmount,initAmount}
 }
 
 export {useAmount}

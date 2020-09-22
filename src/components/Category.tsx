@@ -51,7 +51,7 @@ const Square = styled.div`
 
 
 const Category:React.FC = ()=>{
-  const {category,setCategory,findCategory} = useCategory()
+  const {category,setCategory} = useCategory()
   const history = useHistory()
   return (
     <CategorySelection>

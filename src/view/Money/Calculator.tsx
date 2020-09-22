@@ -5,6 +5,7 @@ import {Line} from '../../components/Line';
 import {Note} from './Note';
 import {Date} from './Date';
 import {useAmount} from '../../hook/useAmount';
+import {useDataSourceItem} from '../../hook/useDataSource';
 
 const CalculatorWrapper = styled.div`
      padding-top: 5px;
@@ -36,7 +37,8 @@ const NumberPadOutputWrapper = styled.div`
 `
 const Calculator:React.FC = ()=>{
 
-    const {findAmount,setAmount,amount} = useAmount()
+    const {setAmount,amount} = useAmount()
+    const {saveDataSource} = useDataSourceItem()
   return (
     <div>
         <Date/>
@@ -63,7 +65,7 @@ const Calculator:React.FC = ()=>{
             <div>.</div>
             <div className={'zero'}>0</div>
             <div className={'OK'}
-                 onClick={()=>{console.log('ok');}}>OK</div>
+                 onClick={saveDataSource}>OK</div>
         </CalculatorWrapper>
     </div>
   )

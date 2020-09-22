@@ -11,7 +11,12 @@ const useDate = ()=>{
     setDate(date)
     window.localStorage.setItem('date',JSON.stringify(date || `${dayjs().format('YYYY-MM-DD')}`))
   },[date])
-  return {date,setDate}
+
+  const initDate = () => {
+    window.localStorage.setItem('date',`${dayjs().format('YYYY-MM-DD')}`)
+  }
+
+  return {date,setDate,initDate}
 }
 
 export {useDate}

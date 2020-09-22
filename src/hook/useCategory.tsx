@@ -10,10 +10,12 @@ const useCategory = () =>{
   useUpdate(()=>{
     window.localStorage.setItem('category',JSON.stringify(category))
   },[category])
-  const findCategory = ()=>{
-    return  JSON.parse(window.localStorage.getItem('category') || '-')
+
+  const initCategory = () => {
+    window.localStorage.setItem('category','-')
   }
-  return {category,setCategory,findCategory}
+
+  return {category,setCategory,initCategory}
 }
 
 export {useCategory}

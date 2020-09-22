@@ -5,17 +5,19 @@ const useNote = ()=>{
   const [note,setNote] = useState('')
   useEffect(()=>{
     setNote('')
-    window.localStorage.setItem('note','[]')
+    window.localStorage.setItem('note','')
   },[])
   useUpdate(()=>{
-    window.localStorage.setItem('note',JSON.stringify(note ||'[]'))
+    window.localStorage.setItem('note',JSON.stringify(note ||''))
   },[note])
 
-  const findNote = ()=>{
-    return JSON.parse(window.localStorage.getItem('note') || '')
+
+  const initNote = () => {
+    window.localStorage.setItem('note','')
   }
 
-  return {findNote,setNote}
+
+  return {setNote,initNote}
 }
 
 export {useNote}

@@ -8,19 +8,22 @@ const useSelectTags = ()=>{
     index < 0 ? setBeSelectedTags([...beSelectedTags,id])
               : setBeSelectedTags(beSelectedTags.filter(item=>item!==id))
   }
+
   useEffect(()=>{
     setBeSelectedTags([])
     window.localStorage.setItem('selectedTags','[]')
   },[])
+
   useUpdate(()=>{
     window.localStorage.setItem('selectedTags',JSON.stringify(beSelectedTags))
   },[beSelectedTags])
 
-  const findSelectedTags = ()=>{
-    return JSON.parse(window.localStorage.getItem('selectedTags') || '[]')
+  const initSelectedTags = ()=>{
+    setBeSelectedTags([])
   }
 
-  return {beSelectedTags,selectThisTag,findSelectedTags}
+
+  return {beSelectedTags,selectThisTag,initSelectedTags}
 }
 
 export {useSelectTags}
