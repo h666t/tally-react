@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
 import {TypeTagsItem, useTags} from '../../hook/useTags';
 import {useSelectTags} from '../../hook/useSelectTags';
+import {useHistory} from 'react-router-dom'
 
 const TagList = styled.div`
     height: 160px;
@@ -50,6 +51,7 @@ const TagList = styled.div`
 const Tags:React.FC = ()=>{
   const {tags} = useTags()
   const {beSelectedTags,selectThisTag} = useSelectTags()
+  const history = useHistory()
   return (
     <TagList>
       <div>
@@ -60,8 +62,12 @@ const Tags:React.FC = ()=>{
               {item.name}
             </div>
         )}
-        <div className={'settingWrapper'}>
-          <Icon id={'#setting'} prefix={'setting'}/>
+        <div className={'settingWrapper'}
+             onClick={()=>{history.push('/Money/TagList')}}
+        >
+          <Icon id={'#setting'}
+                prefix={'setting'}
+          />
         </div>
       </div>
 

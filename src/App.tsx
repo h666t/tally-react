@@ -7,6 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import {NotFound} from './view/NotFound';
+import {TagList} from './view/Money/tagList/TagList';
 
 const App:React.FC = ()=>{
   return (
@@ -19,12 +20,14 @@ const App:React.FC = ()=>{
           <Route exact path="/Money">
             <Money/>
           </Route>
+          <Route exact path="/Money/TagList">
+            <TagList/>
+          </Route>
           <Route  path="/*">
             <NotFound/>
           </Route>
         </Switch>
       </Router>
-
     </div>
   )
 }
