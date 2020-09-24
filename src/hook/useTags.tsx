@@ -27,8 +27,24 @@ const useTags = ()=>{
     window.localStorage.setItem('tags',JSON.stringify(tags))
   },[tags])
 
+  const addTag = () =>{
+    const id = idCreator()
+    const name = window.prompt('请输入标签名')
+    tags.map(t=>{
+      if (t.name === name){
+        window.alert('标签名错误')
+        return false
+      }else {
+        const cloneTags = JSON.parse(JSON.stringify(tags))
+        cloneTags.push({id,name})
+        setTags(cloneTags)
+        return  undefined
+      }
+    }
+    )
+  }
 
-  return {tags}
+  return {tags,addTag}
 }
 
 export {useTags}

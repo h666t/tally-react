@@ -6,13 +6,21 @@ const TitleDiv = styled.div`
     line-height: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
-    padding-left: 20px;
     background: #ebeff2;
 `
 
-const Title:React.FC = ()=>{
+type Props = {
+  text: string
+  prefix: string
+}
+
+const Title:React.FC<Props> = (props)=>{
   return (
-    <TitleDiv>极简记账</TitleDiv>
+    <TitleDiv>
+      <span className={props.prefix}>
+        {props.text}
+      </span>
+    </TitleDiv>
   )
 }
 export {Title}

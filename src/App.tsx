@@ -5,9 +5,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useParams
 } from "react-router-dom";
 import {NotFound} from './view/NotFound';
 import {TagList} from './view/Money/tagList/TagList';
+import {Tagdetail} from './view/Money/tagList/TagDetail';
 
 const App:React.FC = ()=>{
   return (
@@ -22,6 +24,9 @@ const App:React.FC = ()=>{
           </Route>
           <Route exact path="/Money/TagList">
             <TagList/>
+          </Route>
+          <Route exact path="/Money/TagList/:id">
+            <Tagdetail/>
           </Route>
           <Route  path="/*">
             <NotFound/>

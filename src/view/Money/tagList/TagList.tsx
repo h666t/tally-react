@@ -1,8 +1,14 @@
 import React from 'react';
+import {TagListNav} from './TagListNav';
+import {TagListBody} from './TagListBody';
 
 const TagList = ()=>{
+
   return (
-    <div> TagList </div>
+    <div>
+   <TagListNav/>
+   <TagListBody/>
+    </div>
   )
 }
 
