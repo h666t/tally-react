@@ -30,18 +30,21 @@ const useTags = ()=>{
   const addTag = () =>{
     const id = idCreator()
     const name = window.prompt('请输入标签名')
-    tags.map(t=>{
-      if (t.name === name){
-        window.alert('标签名错误')
-        return false
-      }else {
-        const cloneTags = JSON.parse(JSON.stringify(tags))
-        cloneTags.push({id,name})
-        setTags(cloneTags)
-        return  undefined
+    if (name === null || name === "" ){
+      alert('标签名不能为空')
+      return
+    }else {
+      for (let i = 0; i< tags.length; i++){
+        if (tags[i].name === name){
+          alert('标签名重复')
+          break
+        }else {
+          const cloneTags = JSON.parse(JSON.stringify(tags))
+          cloneTags.push({id,name})
+          setTags(cloneTags)
+        }
       }
     }
-    )
   }
 
   return {tags,addTag}
