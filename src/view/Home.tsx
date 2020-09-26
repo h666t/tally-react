@@ -16,6 +16,7 @@ const HomePageWrapper = styled.div`
         margin-right: 20px;
       }
 `
+
 const Home:React.FC = ()=>{
   const history = useHistory()
   return (

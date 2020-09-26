@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
+import {fetchSpecialTimeAmount} from '../../lib/fetchSpecialTimeAmount';
 
 const ScreenWrapper = styled.div`
    display: flex;
@@ -44,20 +46,22 @@ const ScreenWrapper = styled.div`
       color: #0F9570;
      }
    }
-
 `
 
 const RecordScreen = () => {
+  const month = dayjs().format('YYYY-MM-DD')
+  const inputAmount = fetchSpecialTimeAmount('+',month)
+  const outputAmount = fetchSpecialTimeAmount('-',month)
   return (
     <ScreenWrapper>
       <div>
         <span className={'output'}>
         <span>本月支出</span>
-        <span>￥12.00</span>
+        <span>￥{outputAmount}</span>
       </span>
         <span className={'input'}>
           <span>本月收入</span>
-          <span>￥0.00</span>
+          <span>￥{inputAmount}</span>
       </span>
         <span className={'echart'}>查看图标分析</span>
       </div>

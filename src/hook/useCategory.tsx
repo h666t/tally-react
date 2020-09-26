@@ -8,7 +8,7 @@ const useCategory = () =>{
     window.localStorage.setItem('category','-')
   },[])
   useUpdate(()=>{
-    window.localStorage.setItem('category',JSON.stringify(category))
+    window.localStorage.setItem('category',category)
   },[category])
 
   const initCategory = () => {
