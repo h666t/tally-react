@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ButtonWrapper = styled.div`
     >button{
       font-size: 18px; border: none; padding: 8px 12px;
-      background: #f60; border-radius: 4px;
+      background: #f60; border-radius: 10px;
       color: white;  
     }
 `

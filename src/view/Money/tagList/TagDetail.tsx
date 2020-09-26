@@ -16,6 +16,7 @@ const TagDetailWrapper = styled.div`
       >input{
         border:none;
         line-height: 48px;
+        flex-grow: 1;
       }
     }
     >.buttonWrapper{
