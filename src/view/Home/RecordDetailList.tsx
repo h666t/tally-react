@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import {fetchSpecialTimeRecords} from '../../lib/fetchSpecialTimeRecords';
+import dayjs from 'dayjs';
 
-const DetailListWrapper = styled.div`
+const DetailListWrapper = styled.ul`
     display: flex;
-    justify-content: center;
-    >div{
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    height: 300px;
+    li{
+      margin-bottom: 10px;
       width: 90vw;
       border-radius: 18px;
       background: white;
@@ -29,18 +35,23 @@ const DetailListWrapper = styled.div`
 `
 
 const RecordDetailList = () => {
+  const todayRecordsList = fetchSpecialTimeRecords(`${dayjs().format('YYYY-MM-DD')}`)
   return (
     <DetailListWrapper>
-      <div>
-        <span>
-          <span>衣</span>
-        <span>备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</span>
-        </span>
-        <span>
-          <span>-</span>
-          <span>￥12</span>
-        </span>
-      </div>
+      {todayRecordsList.map(item=>{
+        return (
+          <li>
+        <div>
+          <span>{item.beSelectedTags}</span>
+        <span>{item.note}</span>
+        </div>
+            <div>
+          <span>{item.category}</span>
+          <span>￥{item.amount}</span>
+        </div>
+          </li>
+        )
+      })}
     </DetailListWrapper>
   )
 }

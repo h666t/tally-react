@@ -1,4 +1,4 @@
-type DataSourceItem = {
+export type DataSourceItem = {
   amount: string
   beSelectedTags: number[]
   category:'+'|'-'
@@ -12,7 +12,6 @@ const fetchSpecialTimeAmount = (category: '+'|'-',date: string) => {
     if (item.date.indexOf(date)>=0 && item.category === category){
       const money = parseFloat(item.amount)
       amount += money
-      console.log(category);
     }
   })
   return amount

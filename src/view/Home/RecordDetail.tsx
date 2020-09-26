@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {RecordDetailList} from './RecordDetailList';
+import dayjs from 'dayjs';
+import {fetchSpecialTimeAmount} from '../../lib/fetchSpecialTimeAmount';
 
 const Detail = styled.div`
     margin-top: 20px;
@@ -31,16 +33,19 @@ const Detail = styled.div`
 `
 
 const RecordDetail:React.FC = () => {
+  const today = dayjs().format('YYYY-MM-DD')
+  const todayInput = fetchSpecialTimeAmount('+',today)
+  const todayOutput = fetchSpecialTimeAmount('-',today)
   return (
     <Detail>
       <div className={'title'}>
         <span className={'input'}>
           <span>今日支出</span>
-          <span>￥12.00</span>
+          <span>￥{todayOutput}</span>
         </span>
         <span className={'output'}>
           <span>收入</span>
-          <span>$0.00</span>
+          <span>￥{todayInput}</span>
         </span>
       </div>
       <RecordDetailList/>

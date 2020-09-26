@@ -14,7 +14,7 @@ const ScreenWrapper = styled.div`
     justify-content: space-evenly;
     background: white;
     width: 80%;
-    padding: 20px;
+    padding: 30px 20px;
     border-radius: 15px;
     >.output{
       display: flex;
@@ -40,7 +40,7 @@ const ScreenWrapper = styled.div`
     }
     >.echart{
       position: absolute;
-      bottom: 8%;
+      bottom: 10%;
       left: 50%;
       transform: translateX(-50%);
       color: #0F9570;
@@ -49,19 +49,20 @@ const ScreenWrapper = styled.div`
 `
 
 const RecordScreen = () => {
-  const month = dayjs().format('YYYY-MM-DD')
-  const inputAmount = fetchSpecialTimeAmount('+',month)
-  const outputAmount = fetchSpecialTimeAmount('-',month)
+  const currentMonth = dayjs().format('YYYY-MM')
+  const thisMonthInputAmount = fetchSpecialTimeAmount('+',currentMonth)
+  const thisMonthOutputAmount = fetchSpecialTimeAmount('-',currentMonth)
+
   return (
     <ScreenWrapper>
       <div>
         <span className={'output'}>
         <span>本月支出</span>
-        <span>￥{outputAmount}</span>
+        <span>￥{thisMonthOutputAmount}</span>
       </span>
         <span className={'input'}>
           <span>本月收入</span>
-          <span>￥{inputAmount}</span>
+          <span>￥{thisMonthInputAmount}</span>
       </span>
         <span className={'echart'}>查看图标分析</span>
       </div>

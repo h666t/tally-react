@@ -32,7 +32,7 @@ const useDataSourceItem = () => {
     return find('amount','0')
   }
   const findDate = () =>{
-    return find('date',`${dayjs().format('YYYY-MM-DD')}`)
+    return find('date',`${dayjs().format('YYYY-MM-DD-HH-mm')}`)
   }
   const findNote = ()=>{
     return find('note','')
