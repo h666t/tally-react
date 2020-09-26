@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import {NotFound} from './view/NotFound';
 import {TagList} from './view/Money/tagList/TagList';
-import {Tagdetail} from './view/Money/tagList/TagDetail';
+import {TagDetail} from './view/Money/tagList/TagDetail';
 
 const App:React.FC = ()=>{
   return (
@@ -26,7 +26,7 @@ const App:React.FC = ()=>{
             <TagList/>
           </Route>
           <Route exact path="/Money/TagList/:id">
-            <Tagdetail/>
+            <TagDetail/>
           </Route>
           <Route  path="/*">
             <NotFound/>

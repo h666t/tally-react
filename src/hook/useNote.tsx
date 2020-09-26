@@ -11,7 +11,6 @@ const useNote = ()=>{
     window.localStorage.setItem('note',JSON.stringify(note ||''))
   },[note])
 
-
   const initNote = () => {
     window.localStorage.setItem('note','')
   }

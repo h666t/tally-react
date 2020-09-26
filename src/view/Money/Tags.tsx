@@ -70,7 +70,6 @@ const Tags:React.FC = ()=>{
           />
         </div>
       </div>
-
     </TagList>
   )
 }

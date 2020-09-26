@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Icon} from '../../../components/Icon';
+import {Icon} from './Icon';
 import {useHistory} from 'react-router-dom';
 const TagListNavWrapper = styled.div`
     display: flex;
@@ -20,17 +20,23 @@ const PlaceHolder = styled.div`
   width: 20px;
   height: 20px;
 `
-const TagListNav = () => {
+
+type Props = {
+  title: string
+  backPath: string
+}
+
+const NavWithBack:React.FC<Props> = (props) => {
   const history = useHistory()
   return (
     <div>
       <TagListNavWrapper>
-        <Icon id={'#left'} prefix={'TagListBack'} onClick={()=>{history.push('/Money')}}/>
-        <span>标签详情</span>
+        <Icon id={'#left'} prefix={'TagListBack'} onClick={()=>{history.push(`${props.backPath}`)}}/>
+        <span>{props.title}</span>
         <PlaceHolder> </PlaceHolder>
       </TagListNavWrapper>
     </div>
   )
 }
 
-export {TagListNav}
+export {NavWithBack}

@@ -1,12 +1,12 @@
 import React from 'react';
-import {TagListNav} from './TagListNav';
+import {NavWithBack} from '../../../components/NavWithBack';
 import {TagListBody} from './TagListBody';
 
 const TagList = ()=>{
 
   return (
     <div>
-   <TagListNav/>
+   <NavWithBack title={'标签详情'} backPath={'/Money'}/>
    <TagListBody/>
     </div>
   )
