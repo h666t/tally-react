@@ -28,12 +28,14 @@ const useTags = ()=>{
   },[tags])
 
   const addTag = () =>{
-    const id = idCreator()
     const name = window.prompt('请输入标签名')
-    if (name === null || name === "" ){
+    if (name === "" ){
       alert('标签名不能为空')
       return
-    }else {
+    }else if(name === null){
+      return;
+    }else{
+      const id = idCreator()
       for (let i = 0; i< tags.length; i++){
         if (tags[i].name === name){
           alert('标签名重复')
