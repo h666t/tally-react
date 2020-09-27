@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useNote} from '../../hook/useNote';
+import {NoteString} from './Calculator';
 
 const NoteWrapper = styled.label`
      display: flex;
@@ -19,8 +20,12 @@ const NoteWrapper = styled.label`
       }
 `
 
-const Note:React.FC = ()=>{
-  const {setNote} = useNote()
+type Props = {
+  note: string
+  setNote: (note: NoteString)=>void
+}
+
+const Note:React.FC<Props> = (props)=>{
 
  return (
    <NoteWrapper>
@@ -28,7 +33,7 @@ const Note:React.FC = ()=>{
      <input type="text" placeholder={'写点备注吧...'}
             defaultValue={''}
             onChange={(e)=>{
-              setNote(e.target.value)
+              props.setNote({note: e.target.value})
             }}
      />
    </NoteWrapper>

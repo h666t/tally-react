@@ -17,7 +17,7 @@ type DataSourceItem = {
   beSelectedTags: number[]
   category: '+'|'-'
   date: string
-  note?: string
+  note: string
 }
 
 const Money:React.FC = () => {
@@ -34,10 +34,16 @@ const Money:React.FC = () => {
   return (
       <MoneyWrapper>
         <div>
-          <Category value={dataSourceItem.category} onChange={onChange} />
-          <Tags/>
+          <Category category={dataSourceItem.category} setCategory={onChange} />
+          <Tags beSelectedTags={dataSourceItem.beSelectedTags} setBeSelectedTags={onChange}/>
         </div>
-        <Calculator/>
+        <Calculator amount={dataSourceItem.amount}
+                    setAmount={onChange}
+                    note={dataSourceItem.note}
+                    setNote={onChange}
+                    date={dataSourceItem.date}
+                    setDate={onChange}
+        />
       </MoneyWrapper>
   )
 }

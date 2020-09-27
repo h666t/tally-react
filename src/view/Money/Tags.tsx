@@ -47,10 +47,32 @@ const TagList = styled.div`
     }
 `
 
+type BeSelectedTags = {
+  beSelectedTags: number[]
+}
 
-const Tags:React.FC = ()=>{
+type Props = {
+  beSelectedTags: number[]
+  setBeSelectedTags:(beSelectedTags:BeSelectedTags)=>void
+}
+
+const Tags:React.FC<Props> = (props)=>{
   const {tags} = useTags()
-  const {beSelectedTags,selectThisTag} = useSelectTags()
+  const {setBeSelectedTags} = props
+  const beSelectedTags = props.beSelectedTags
+  const selectThisTag = (id:number)=>{
+    const cloneBeSelectedTags = JSON.parse(JSON.stringify(beSelectedTags))
+    for (let i = 0; i <= beSelectedTags.length;i++){
+      if (beSelectedTags[i] === id){
+        cloneBeSelectedTags.splice(i,1)
+        setBeSelectedTags({beSelectedTags:cloneBeSelectedTags})
+        break
+      }else {
+        cloneBeSelectedTags.push(id)
+        setBeSelectedTags({beSelectedTags:cloneBeSelectedTags})
+      }
+    }
+  }
   const history = useHistory()
   return (
     <TagList>

@@ -4,7 +4,6 @@ import {generateOutput} from '../../lib/generateOutput';
 import {Line} from '../../components/Line';
 import {Note} from './Note';
 import {Date} from './Date';
-import {useAmount} from '../../hook/useAmount';
 import {useDataSourceItem} from '../../hook/useDataSource';
 
 const CalculatorWrapper = styled.div`
@@ -35,20 +34,45 @@ const NumberPadOutputWrapper = styled.div`
       font-size: 36px;
       font-family: Consolas,monospace;
 `
-const Calculator:React.FC = ()=>{
-    const {setAmount,amount} = useAmount()
+
+type Amount = {
+  amount: string
+}
+
+export type NoteString = {
+  note: string
+}
+
+export type DateString = {
+  date: string
+}
+
+type Props = {
+  amount: string
+  setAmount: (amount: Amount)=>void
+  note:string
+  setNote: (note: NoteString)=>void
+  date: string
+  setDate: (date: DateString)=> void
+}
+
+const Calculator:React.FC<Props> = (props)=>{
+    const {setAmount,amount} = props
     const {saveDataSource} = useDataSourceItem()
+  const generateAmount = (amount: string) => {
+      setAmount({amount:amount})
+  }
   return (
     <div>
-        <Date/>
+        <Date date={props.date} setDate={props.setDate}/>
         <Line/>
         <NumberPadOutputWrapper>
             {amount}
         </NumberPadOutputWrapper>
         <Line/>
-        <Note/>
+        <Note note={props.note} setNote={props.setNote} />
         <CalculatorWrapper onClick={(e)=>{
-            generateOutput(`${(e.target as HTMLDivElement).innerText}`,setAmount)
+            generateOutput(`${(e.target as HTMLDivElement).innerText}`,generateAmount)
         }}>
             <div>1</div>
             <div>2</div>
