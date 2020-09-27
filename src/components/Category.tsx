@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Icon} from './Icon';
 import {useHistory} from 'react-router-dom'
@@ -42,13 +42,11 @@ const CategorySelection = styled.section`
     }
    
 `
-
 const Square = styled.div`
   width: 20px;
   height: 20px;
   margin-right: 20px;
 `
-
 
 const Category:React.FC = ()=>{
   const {category,setCategory} = useCategory()

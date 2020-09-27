@@ -14,16 +14,16 @@ const DateWrapper = styled.div`
 
 const Date:React.FC = ()=>{
   const {date,setDate} = useDate()
-  const ref1 = useRef(null)
-
+  const ref1 = useRef(null);
+  const showDate = date.slice(0, 10);
   return (
     <DateWrapper>
       <span>日期：</span>
       <input ref={ref1}
              type={'date'}
-             defaultValue={`${date}`}
-             onChange={()=>{
-               setDate((ref1.current! as HTMLInputElement).value)
+             defaultValue={`${showDate}`}
+             onChange={() => {
+               setDate((ref1.current! as HTMLInputElement).value);
              }}
       />
     </DateWrapper>

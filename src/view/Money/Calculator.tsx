@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {generateOutput} from '../../lib/generateOutput';
 import {Line} from '../../components/Line';
@@ -36,7 +36,6 @@ const NumberPadOutputWrapper = styled.div`
       font-family: Consolas,monospace;
 `
 const Calculator:React.FC = ()=>{
-
     const {setAmount,amount} = useAmount()
     const {saveDataSource} = useDataSourceItem()
   return (

@@ -8,7 +8,7 @@ import {useAmount} from './useAmount';
 
 const useDataSourceItem = () => {
   const {initSelectedTags} = useSelectTags()
-  const {initCategory} = useCategory()
+  const {initCategory,setCategory} = useCategory()
   const {initDate} = useDate()
   const {initNote} = useNote()
   const {initAmount} = useAmount()
@@ -32,7 +32,7 @@ const useDataSourceItem = () => {
     return find('amount','0')
   }
   const findDate = () =>{
-    return find('date',`${dayjs().format('YYYY-MM-DD-HH-mm')}`)
+    return find('date',`${dayjs().format('YYYY-MM-DD-HH-mm-ss')}`)
   }
   const findNote = ()=>{
     return find('note','')

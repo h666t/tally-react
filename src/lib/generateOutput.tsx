@@ -1,7 +1,5 @@
 let container = '0'
 const generateOutput = (value:string,setAmount:(amount:string)=>void) => {
-
-
   switch (value) {
     case '0' :case '1':case '2' :case '3':case '4' :case '5':case '6' :case '7':case '8' :case '9':
       if (container[0] === '0' && container[1]!=='.'){
@@ -43,6 +41,9 @@ const generateOutput = (value:string,setAmount:(amount:string)=>void) => {
         return;
       }
       setAmount(container += value)
+      break
+    default:
+      container = '0'
   }
 }
 
