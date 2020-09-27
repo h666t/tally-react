@@ -1,10 +1,5 @@
-export type DataSourceItem = {
-  amount: string
-  beSelectedTags: number[]
-  category:'+'|'-'
-  date: string
-  note: string
-}
+import {DataSourceItem} from '../view/Money';
+
 const fetchSpecialTimeAmount = (category: '+'|'-',date: string) => {
   const dataSource: DataSourceItem[] = JSON.parse(window.localStorage.getItem('records') || '[]')
   let amount = 0

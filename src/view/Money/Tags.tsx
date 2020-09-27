@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
 import {TypeTagsItem, useTags} from '../../hook/useTags';
-import {useSelectTags} from '../../hook/useSelectTags';
 import {useHistory} from 'react-router-dom'
 
 const TagList = styled.div`

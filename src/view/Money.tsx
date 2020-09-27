@@ -12,7 +12,7 @@ const MoneyWrapper = styled.div`
     height: 100vh;
 `
 
-type DataSourceItem = {
+export type DataSourceItem = {
   amount: string
   beSelectedTags: number[]
   category: '+'|'-'
@@ -43,6 +43,7 @@ const Money:React.FC = () => {
                     setNote={onChange}
                     date={dataSourceItem.date}
                     setDate={onChange}
+                    dataSourceItem={dataSourceItem}
         />
       </MoneyWrapper>
   )

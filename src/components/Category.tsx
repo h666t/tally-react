@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Icon} from './Icon';
 import {useHistory} from 'react-router-dom'
-import {useCategory} from '../hook/useCategory';
 
 const CategorySelection = styled.section`
     display: flex;

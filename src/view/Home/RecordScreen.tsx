@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import {fetchSpecialTimeAmount} from '../../lib/fetchSpecialTimeAmount';
+import {fetchSpecialTimeAmount} from 'lib/fetchSpecialTimeAmount';
+
 
 const ScreenWrapper = styled.div`
    display: flex;

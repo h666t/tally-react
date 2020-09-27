@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import {useDate} from '../../hook/useDate';
 import {DateString} from './Calculator';
 
 const DateWrapper = styled.div`

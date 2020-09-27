@@ -1,7 +1,7 @@
-import {DataSourceItem} from './fetchSpecialTimeAmount';
 import dayjs from 'dayjs';
+import {DataSourceItem} from '../view/Money';
 
-const fetchSpecialTimeRecords = (date: string) => {
+const fetchSpecialTimeRecords = () => {
   const dataSource = JSON.parse(window.localStorage.getItem('records') || '[]')
   const today = dayjs().format('YYYY-MM-DD')
   const container: DataSourceItem[] = []

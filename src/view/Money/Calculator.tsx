@@ -4,7 +4,8 @@ import {generateOutput} from '../../lib/generateOutput';
 import {Line} from '../../components/Line';
 import {Note} from './Note';
 import {Date} from './Date';
-import {useDataSourceItem} from '../../hook/useDataSource';
+import {saveDataSource} from '../../lib/saveDataSource';
+import {DataSourceItem} from '../Money';
 
 const CalculatorWrapper = styled.div`
      padding-top: 5px;
@@ -54,11 +55,11 @@ type Props = {
   setNote: (note: NoteString)=>void
   date: string
   setDate: (date: DateString)=> void
+  dataSourceItem: DataSourceItem
 }
 
 const Calculator:React.FC<Props> = (props)=>{
     const {setAmount,amount} = props
-    const {saveDataSource} = useDataSourceItem()
   const generateAmount = (amount: string) => {
       setAmount({amount:amount})
   }
@@ -88,7 +89,9 @@ const Calculator:React.FC<Props> = (props)=>{
             <div>.</div>
             <div className={'zero'}>0</div>
             <div className={'OK'}
-                 onClick={saveDataSource}>OK</div>
+                 onClick={()=>{
+                   saveDataSource(props.dataSourceItem)
+                 }}>OK</div>
         </CalculatorWrapper>
     </div>
   )
