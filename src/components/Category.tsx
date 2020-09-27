@@ -48,17 +48,23 @@ const Square = styled.div`
   margin-right: 20px;
 `
 
-const Category:React.FC = ()=>{
-  const {category,setCategory} = useCategory()
+type Props = {
+  value: '+'|'-'
+  onChange:(obj:{category:'+'|'-'})=>void
+}
+
+const Category:React.FC<Props> = (props)=>{
+  const category=props.value
+  const {onChange} = props
   const history = useHistory()
   return (
     <CategorySelection>
       <Icon id={'#left'} prefix={'category-left'} onClick={()=>{history.push('/')}} />
       <div>
         <span className={category==='-'?'selected':''}
-              onClick={()=>{setCategory('-')}}>支出</span>
+              onClick={()=>{onChange({category:'-'})}}>支出</span>
         <span className={category==='+'?'selected':''}
-              onClick={()=>{setCategory('+')}}>收入</span>
+              onClick={()=>{onChange({category:'+'})}}>收入</span>
       </div>
       <Square/>
     </CategorySelection>
