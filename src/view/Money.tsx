@@ -49,7 +49,7 @@ const Money:React.FC = () => {
         <TextContext.Provider value={{state,dispatch}}>
         <div>
           <Category/>
-          {/*<Tags/>*/}
+          <Tags/>
         </div>
         {/*<Calculator/>*/}
         </TextContext.Provider>

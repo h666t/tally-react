@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
-import {TypeTagsItem, useTags} from '../../hook/useTags';
+import {useTags} from '../../hook/useTags';
 import {useHistory} from 'react-router-dom'
+import {TextContext} from '../Money';
 
 const TagList = styled.div`
     height: 160px;
@@ -45,32 +46,26 @@ const TagList = styled.div`
       }
     }
 `
-
-type BeSelectedTags = {
-  beSelectedTags: number[]
-}
-
-type Props = {
-  beSelectedTags: number[]
-  setBeSelectedTags:(beSelectedTags:BeSelectedTags)=>void
-}
-
-const Tags:React.FC<Props> = (props)=>{
+const Tags:React.FC = ()=>{
+  const {state,dispatch} = useContext(TextContext)
+  const beSelectedTags = state.beSelectedTags
+  const changeBeSelectedTags = (beSelectedTags:number[]) => {
+    dispatch({type:'changeBeSelectedTags',beSelectedTags:beSelectedTags})
+  }
   const {tags} = useTags()
-  const {setBeSelectedTags} = props
-  const beSelectedTags = props.beSelectedTags
+
   const selectThisTag = (id:number)=>{
     const cloneBeSelectedTags = JSON.parse(JSON.stringify(beSelectedTags))
-    for (let i = 0; i <= beSelectedTags.length;i++){
-      if (beSelectedTags[i] === id){
-        cloneBeSelectedTags.splice(i,1)
-        setBeSelectedTags({beSelectedTags:cloneBeSelectedTags})
-        break
-      }else {
-        cloneBeSelectedTags.push(id)
-        setBeSelectedTags({beSelectedTags:cloneBeSelectedTags})
+      for (let i = 0; i <= beSelectedTags.length ;i++){
+        if (beSelectedTags[i] === id){
+          cloneBeSelectedTags.splice(i,1)
+          changeBeSelectedTags(cloneBeSelectedTags)
+        }else if (beSelectedTags.indexOf(id)<0){
+            cloneBeSelectedTags.push(id)
+            changeBeSelectedTags(cloneBeSelectedTags)
+            break
+        }
       }
-    }
   }
   const history = useHistory()
   return (
