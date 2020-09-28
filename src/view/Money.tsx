@@ -1,4 +1,4 @@
-import React, {createContext, ReducerAction, ReducerState, useReducer, useState} from 'react';
+import React, {createContext, ReducerAction, ReducerState, useEffect, useReducer, useState} from 'react';
 import {Category} from '../components/Category';
 import {Tags} from './Money/Tags';
 import styled from 'styled-components';
@@ -30,20 +30,26 @@ const initial:DataSourceItem = {
 
 const reducer = (state:ReducerState<any>,action:any) => {
   if (action.type === 'changeCategory'){
-    return {...initial,category:action.category}
+    // @ts-ignore
+    return {...state,category:action.category}
   }else if (action.type === 'changeBeSelectedTags'){
-    return {...initial,beSelectedTags:action.beSelectedTags}
+    // @ts-ignore
+    return {...state,beSelectedTags:action.beSelectedTags}
   }else if (action.type === 'changeAmount'){
-    return {...initial,amount:action.amount}
+    // @ts-ignore
+    return {...state,amount:action.amount}
   }else if (action.type === 'changeDate'){
-    return {...initial,date:action.date}
+    // @ts-ignore
+    return {...state,date:action.date}
   }else if (action.type === 'changeNote'){
-    return {...initial,note:action.note}
+    // @ts-ignore
+    return {...state,note:action.note}
   }
 }
 export const TextContext  = createContext<any>(null)
 const Money:React.FC = () => {
   const [state,dispatch] = useReducer(reducer,initial)
+  useEffect(()=>{console.log(state);})
   return (
       <MoneyWrapper>
         <TextContext.Provider value={{state,dispatch}}>
@@ -51,7 +57,7 @@ const Money:React.FC = () => {
           <Category/>
           <Tags/>
         </div>
-        {/*<Calculator/>*/}
+        <Calculator/>
         </TextContext.Provider>
       </MoneyWrapper>
   )

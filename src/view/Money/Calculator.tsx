@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {generateOutput} from '../../lib/generateOutput';
 import {Line} from '../../components/Line';
 import {Note} from './Note';
 import {Date} from './Date';
 import {saveDataSource} from '../../lib/saveDataSource';
-import {DataSourceItem} from '../Money';
+import {DataSourceItem, TextContext} from '../Money';
 
 const CalculatorWrapper = styled.div`
      padding-top: 5px;
@@ -36,42 +36,30 @@ const NumberPadOutputWrapper = styled.div`
       font-family: Consolas,monospace;
 `
 
-type Amount = {
-  amount: string
-}
+
 
 export type NoteString = {
   note: string
 }
 
-export type DateString = {
-  date: string
-}
-
-type Props = {
-  amount: string
-  setAmount: (amount: Amount)=>void
-  note:string
-  setNote: (note: NoteString)=>void
-  date: string
-  setDate: (date: DateString)=> void
-  dataSourceItem: DataSourceItem
-}
-
-const Calculator:React.FC<Props> = (props)=>{
-    const {setAmount,amount} = props
+const Calculator:React.FC = ()=>{
+  const {state,dispatch} = useContext(TextContext)
+  const changeAmount = (amount: string) => {
+    dispatch({type:'changeAmount',amount: amount})
+  }
+  const amount = state.amount
   const generateAmount = (amount: string) => {
-      setAmount({amount:amount})
+      changeAmount(amount)
   }
   return (
     <div>
-        <Date date={props.date} setDate={props.setDate}/>
+        <Date/>
         <Line/>
         <NumberPadOutputWrapper>
             {amount}
         </NumberPadOutputWrapper>
         <Line/>
-        <Note note={props.note} setNote={props.setNote} />
+        <Note/>
         <CalculatorWrapper onClick={(e)=>{
             generateOutput(`${(e.target as HTMLDivElement).innerText}`,generateAmount)
         }}>
@@ -90,7 +78,7 @@ const Calculator:React.FC<Props> = (props)=>{
             <div className={'zero'}>0</div>
             <div className={'OK'}
                  onClick={()=>{
-                   saveDataSource(props.dataSourceItem)
+                   saveDataSource(state)
                  }}>OK</div>
         </CalculatorWrapper>
     </div>

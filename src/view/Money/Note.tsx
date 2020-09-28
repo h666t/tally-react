@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {NoteString} from './Calculator';
+import {TextContext} from '../Money';
 
 const NoteWrapper = styled.label`
      display: flex;
@@ -19,20 +20,19 @@ const NoteWrapper = styled.label`
       }
 `
 
-type Props = {
-  note: string
-  setNote: (note: NoteString)=>void
-}
 
-const Note:React.FC<Props> = (props)=>{
-
+const Note:React.FC = ()=>{
+const {dispatch} = useContext(TextContext)
+  const changeNote = (note: string) => {
+    dispatch({type:'changeNote',note:note})
+  }
  return (
    <NoteWrapper>
      <span>备注：</span>
      <input type="text" placeholder={'写点备注吧...'}
             defaultValue={''}
             onChange={(e)=>{
-              props.setNote({note: e.target.value})
+              changeNote( e.target.value)
             }}
      />
    </NoteWrapper>

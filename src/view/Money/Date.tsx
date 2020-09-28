@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import {DateString} from './Calculator';
+import {TextContext} from '../Money';
 
 const DateWrapper = styled.div`
       display: flex;
@@ -10,13 +10,13 @@ const DateWrapper = styled.div`
       padding-left: 10px;
       background: white;
 `
-type Props = {
-  date: string
-  setDate: (date: DateString)=>void
-}
 
-const Date:React.FC<Props> = (props)=>{
-  const {date,setDate} = props
+const Date:React.FC = ()=>{
+  const {state,dispatch} = useContext(TextContext)
+  const date = state.date
+  const changeDate = (date: string) => {
+    dispatch({type: 'changeDate',date:date})
+  }
   const ref1 = useRef(null);
   const showDate = date.slice(0, 10);
   return (
@@ -26,7 +26,7 @@ const Date:React.FC<Props> = (props)=>{
              type={'date'}
              defaultValue={`${showDate}`}
              onChange={() => {
-               setDate({date: (ref1.current! as HTMLInputElement).value});
+               changeDate((ref1.current! as HTMLInputElement).value);
              }}
       />
     </DateWrapper>
