@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Icon} from './Icon';
 import {useHistory} from 'react-router-dom'
+import {TextContext} from '../view/Money';
 
 const CategorySelection = styled.section`
     display: flex;
@@ -47,22 +48,21 @@ const Square = styled.div`
   margin-right: 20px;
 `
 
-type Props = {
-  category: '+'|'-'
-  setCategory:(obj:{category:'+'|'-'})=>void
-}
-
-const Category:React.FC<Props> = (props)=>{
-  const {setCategory,category} = props
+const Category:React.FC = ()=>{
+  const {state,dispatch} = useContext(TextContext)
+  const category = state.category
+  const changeCategory = (category: string)=>{
+    dispatch({type:'changeCategory',category:category})
+  }
   const history = useHistory()
   return (
     <CategorySelection>
       <Icon id={'#left'} prefix={'category-left'} onClick={()=>{history.push('/')}} />
       <div>
         <span className={category==='-'?'selected':''}
-              onClick={()=>{setCategory({category:'-'})}}>支出</span>
+              onClick={()=>{changeCategory('-')}}>支出</span>
         <span className={category==='+'?'selected':''}
-              onClick={()=>{setCategory({category:'+'})}}>收入</span>
+              onClick={()=>{changeCategory('+')}}>收入</span>
       </div>
       <Square/>
     </CategorySelection>
