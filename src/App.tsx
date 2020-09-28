@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useParams
 } from "react-router-dom";
 import {NotFound} from './view/NotFound';
 import {TagList} from './view/Money/tagList/TagList';

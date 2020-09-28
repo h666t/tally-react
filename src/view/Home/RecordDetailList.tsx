@@ -35,7 +35,7 @@ const DetailListWrapper = styled.ul`
 `
 
 const RecordDetailList = () => {
-  const todayRecordsList = fetchSpecialTimeRecords(`${dayjs().format('YYYY-MM-DD')}`)
+  const todayRecordsList = fetchSpecialTimeRecords()
   return (
     <DetailListWrapper>
       {todayRecordsList.map(item=>{

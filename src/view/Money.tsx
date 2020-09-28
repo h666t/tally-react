@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ReducerAction, ReducerState, useReducer, useState} from 'react';
 import {Category} from '../components/Category';
 import {Tags} from './Money/Tags';
 import styled from 'styled-components';
@@ -20,7 +20,13 @@ export type DataSourceItem = {
   note: string
 }
 
+
+
+
+
+
 const Money:React.FC = () => {
+
   const [dataSourceItem,setDataSourceItem] = useState<DataSourceItem>({
     amount:'0',
     beSelectedTags:[],
