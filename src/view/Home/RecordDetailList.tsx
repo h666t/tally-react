@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {fetchSpecialTimeRecords} from '../../lib/fetchSpecialTimeRecords';
+import {fetchSpecialDataSource} from '../../lib/fetchSpecialDataSource';
 import dayjs from 'dayjs';
 
 const DetailListWrapper = styled.ul`
@@ -35,7 +35,7 @@ const DetailListWrapper = styled.ul`
 `
 
 const RecordDetailList = () => {
-  const todayRecordsList = fetchSpecialTimeRecords()
+  const todayRecordsList = fetchSpecialDataSource(`${dayjs().format('YYYY-MM-DD')}`,'both')
   return (
     <DetailListWrapper>
       {todayRecordsList.map(item=>{

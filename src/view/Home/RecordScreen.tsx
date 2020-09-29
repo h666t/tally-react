@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import {fetchSpecialTimeAmount} from 'lib/fetchSpecialTimeAmount';
+import {useHistory} from 'react-router-dom'
 
 
 const ScreenWrapper = styled.div`
@@ -50,6 +51,7 @@ const ScreenWrapper = styled.div`
 `
 
 const RecordScreen = () => {
+  const history = useHistory()
   const currentMonth = dayjs().format('YYYY-MM')
   const thisMonthInputAmount = fetchSpecialTimeAmount('+',currentMonth)
   const thisMonthOutputAmount = fetchSpecialTimeAmount('-',currentMonth)
@@ -65,7 +67,10 @@ const RecordScreen = () => {
           <span>本月收入</span>
           <span>￥{thisMonthInputAmount}</span>
       </span>
-        <span className={'echart'}>查看图标分析</span>
+        <span className={'echart'}
+              onClick={()=>{history.push('/Statistics')}}>
+          查看图标分析
+        </span>
       </div>
     </ScreenWrapper>
   )
