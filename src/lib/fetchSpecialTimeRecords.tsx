@@ -19,7 +19,6 @@ const fetchSpecialTimeRecords = () => {
       return 1
     }
   })
-  console.log(container);
   return container
 }
 

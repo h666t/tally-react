@@ -1,8 +1,8 @@
 import {DataSourceItem} from '../view/Money';
 
 
-  const saveDataSource = (dataSourceItem:DataSourceItem) => {
 
+  const saveDataSource = (dataSourceItem:DataSourceItem,fn:()=>void) => {
     if (dataSourceItem.beSelectedTags.length === 0 ){
       alert('请至少选择一个标签')
       return
@@ -10,9 +10,10 @@ import {DataSourceItem} from '../view/Money';
       alert('请输入金额')
       return;
     }else {
-      const records = JSON.parse(window.localStorage.getItem('records') || '[]')
-      records.push(dataSourceItem);
-      window.localStorage.setItem('records',JSON.stringify(records))
+      const dataSource:DataSourceItem[] = JSON.parse(window.localStorage.getItem('dataSource') || '[]')
+      dataSource.push(dataSourceItem)
+      window.localStorage.setItem('dataSource',JSON.stringify(dataSource))
+      fn()
     }
   }
 

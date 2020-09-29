@@ -51,6 +51,9 @@ const Calculator:React.FC = ()=>{
   const generateAmount = (amount: string) => {
       changeAmount(amount)
   }
+  const initialMoney = () => {
+    dispatch({type:'initial'})
+  }
   return (
     <div>
         <Date/>
@@ -78,7 +81,7 @@ const Calculator:React.FC = ()=>{
             <div className={'zero'}>0</div>
             <div className={'OK'}
                  onClick={()=>{
-                   saveDataSource(state)
+                   saveDataSource(state,initialMoney)
                  }}>OK</div>
         </CalculatorWrapper>
     </div>

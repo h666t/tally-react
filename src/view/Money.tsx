@@ -44,12 +44,13 @@ const reducer = (state:ReducerState<any>,action:any) => {
   }else if (action.type === 'changeNote'){
     // @ts-ignore
     return {...state,note:action.note}
+  }else if (action.type === 'initial'){
+    return {...initial}
   }
 }
 export const TextContext  = createContext<any>(null)
 const Money:React.FC = () => {
   const [state,dispatch] = useReducer(reducer,initial)
-  useEffect(()=>{console.log(state);})
   return (
       <MoneyWrapper>
         <TextContext.Provider value={{state,dispatch}}>
