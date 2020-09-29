@@ -15,7 +15,6 @@ type Props = {
 
 const EchartPart:React.FC<Props> = (props) => {
   let myChart = null
-
   const {monthOrYear} = props
   const xData = () => {
       const result: number[] = []
