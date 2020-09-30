@@ -7,6 +7,7 @@ import {fetchSpecialTimeAmount} from '../lib/fetchSpecialTimeAmount';
 import {EchartPart} from './statistics/EchartPart';
 import {DataSourceItem} from './Money';
 import {fetchSpecialDataSource} from '../lib/fetchSpecialDataSource';
+import {Icon} from '../components/Icon';
 
 const StatisticsWrapper = styled.div`
   >.screen{
@@ -17,10 +18,20 @@ const StatisticsWrapper = styled.div`
     justify-content: center;
     padding-left: 20px;
     margin-top: 30px;
-    >span:nth-child(1){
-      font-weight: bold;
-      padding-bottom: 5px;
+    >.dateLine{
+      display: flex;
+      justify-content: space-between;
+      margin-right: 20px;
+      >.calendarIcon{
+        width: 20px;
+        height: 20px;
+      }
+        >span:nth-child(1){
+        font-weight: bold;
+        padding-bottom: 5px;
+      }
     }
+    
   }
   >.buttonWrapper{
     display: flex;
@@ -74,7 +85,10 @@ const Statistics:React.FC = () => {
     <StatisticsWrapper>
       <NavWithBack title={'账单详情'} backPath={'/'}/>
           <div className={'screen'}>
+            <div className={'dateLine'}>
               <span>{thisMonth}</span>
+              <Icon id={'#calendar'} prefix={'calendarIcon'}/>
+            </div>
               <span>
                 支出
                 <span>￥{inputAmount}</span>

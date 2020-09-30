@@ -6,7 +6,7 @@ const echarts = require('echarts');
 
 const EchartWraper = styled.div`
    >#main{
-    width: 500px;
+    width: 100vw;
     height: 500px;
    }
 `
@@ -53,7 +53,23 @@ const EchartPart:React.FC<Props> = (props) => {
         name: '销量',
         type: 'bar',
         data: YData()
-      }]
+      }],
+      grid: [{
+        left: '15%',
+        bottom: '18%',
+        right: '0%'
+      }],
+      dataZoom: [{
+        type: 'slider',
+        show: true,
+        xAxisIndex: [0],
+        left: '5%',
+        bottom: 30,
+        start: 0,
+        end: 90 ,
+        minSpan:35,
+        maxSpan:35,
+      }],
     };
     myChart.setOption(option);
   },[monthOrYear,specialDataSource])
