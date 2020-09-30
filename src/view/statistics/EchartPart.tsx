@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {EChartOption} from 'echarts';
+import {DataSourceItem} from '../Money';
 const echarts = require('echarts');
 
 const EchartWraper = styled.div`
@@ -12,23 +13,29 @@ const EchartWraper = styled.div`
 
 type Props = {
   monthOrYear: 'month' | 'year'
+  specialDataSource: DataSourceItem[]
 }
 
 const EchartPart:React.FC<Props> = (props) => {
   let myChart = null
-  const {monthOrYear} = props
+  const {monthOrYear,specialDataSource} = props
   const xData = () => {
-      const result: number[] = []
+      const XResult: number[] = []
       if (monthOrYear === 'year'){
         for (let i = 1; i <= 12; i++){
-          result.push(i)
+          XResult.push(i)
         }
       }else if (monthOrYear === 'month'){
         for (let i = 1; i <= 30; i++){
-          result.push(i)
+          XResult.push(i)
         }
       }
-      return result
+      return XResult
+  }
+  const YData = () => {
+    const YResult:number[] = []
+    specialDataSource.forEach(item=>YResult.push(parseFloat(item.amount)))
+    return YResult
   }
   let option: EChartOption
   useEffect(()=>{
@@ -45,11 +52,11 @@ const EchartPart:React.FC<Props> = (props) => {
       series: [{
         name: '销量',
         type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
+        data: YData()
       }]
     };
     myChart.setOption(option);
-  },[monthOrYear])
+  },[monthOrYear,specialDataSource])
   return (
     <EchartWraper>
       <div id={'main'}> </div>

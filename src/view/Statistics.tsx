@@ -94,7 +94,7 @@ const Statistics:React.FC = () => {
           切换{monthOrYear === 'month' ? '月' : '年'}账单
         </span>
       </div>
-      <EchartPart monthOrYear={monthOrYear}/>
+      <EchartPart monthOrYear={monthOrYear} specialDataSource={specialDataSource}/>
     </StatisticsWrapper>
   )
 }
