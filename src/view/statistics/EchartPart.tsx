@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import {EChartOption} from 'echarts';
 const echarts = require('echarts');
 
 const EchartWraper = styled.div`
@@ -23,27 +24,32 @@ const EchartPart:React.FC<Props> = (props) => {
           result.push(i)
         }
       }else if (monthOrYear === 'month'){
+        for (let i = 1; i <= 30; i++){
+          result.push(i)
+        }
       }
+      return result
   }
-  const  option = {
-    title:{
-      text:'支出'
-    },
-    tooltip: {},
-    xAxis: {
-      data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-    },
-    yAxis: {},
-    series: [{
-      name: '销量',
-      type: 'bar',
-      data: [5, 20, 36, 10, 10, 20]
-    }]
-  };
+  let option: EChartOption
   useEffect(()=>{
     myChart = echarts.init(document.getElementById('main'));
+    option =  {
+      title:{
+        text:'支出'
+      },
+      tooltip: {},
+      xAxis: {
+        data: xData()
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    };
     myChart.setOption(option);
-  },[])
+  },[monthOrYear])
   return (
     <EchartWraper>
       <div id={'main'}> </div>
