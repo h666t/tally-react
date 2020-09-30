@@ -8,6 +8,7 @@ import {EchartPart} from './statistics/EchartPart';
 import {DataSourceItem} from './Money';
 import {fetchSpecialDataSource} from '../lib/fetchSpecialDataSource';
 import {Icon} from '../components/Icon';
+import {YearScreen} from '../view/statistics/YearScreen';
 
 const StatisticsWrapper = styled.div`
   >.screen{
@@ -31,7 +32,6 @@ const StatisticsWrapper = styled.div`
         padding-bottom: 5px;
       }
     }
-    
   }
   >.buttonWrapper{
     display: flex;
@@ -57,6 +57,7 @@ const StatisticsWrapper = styled.div`
 `
 
 const Statistics:React.FC = () => {
+  const [isShowYearScreen,setIsShowYearScreen] = useState<'true' | 'false'>('true')
   const thisMonth = `${dayjs().format('YYYY年MM月')}`
   const inputAmount = fetchSpecialTimeAmount('+',thisMonth).toFixed(2)
   const outputAmount = fetchSpecialTimeAmount('-',thisMonth).toFixed(2)
@@ -84,10 +85,16 @@ const Statistics:React.FC = () => {
   return (
     <StatisticsWrapper>
       <NavWithBack title={'账单详情'} backPath={'/'}/>
+      {isShowYearScreen === 'true' ? <YearScreen/> : ''}
           <div className={'screen'}>
             <div className={'dateLine'}>
               <span>{thisMonth}</span>
-              <Icon id={'#calendar'} prefix={'calendarIcon'}/>
+              {monthOrYear === 'year' ? <Icon id={'#calendar'}
+                                              prefix={'calendarIcon'}
+                                              onClick={()=>{
+                                                isShowYearScreen === 'true' ? setIsShowYearScreen('false') : setIsShowYearScreen('true')
+                                              }}
+              /> : ''}
             </div>
               <span>
                 支出
