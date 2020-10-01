@@ -85,7 +85,7 @@ const Statistics:React.FC = () => {
   return (
     <StatisticsWrapper>
       <NavWithBack title={'账单详情'} backPath={'/'}/>
-      {isShowYearScreen === 'true' ? <YearScreen/> : ''}
+      {isShowYearScreen === 'true' && monthOrYear === 'year' ? <YearScreen/> : ''}
           <div className={'screen'}>
             <div className={'dateLine'}>
               <span>{thisMonth}</span>

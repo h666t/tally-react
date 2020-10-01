@@ -55,7 +55,7 @@ const EchartPart:React.FC<Props> = (props) => {
         data: YData()
       }],
       grid: [{
-        left: '15%',
+        left: '13%',
         bottom: '18%',
         right: '0%'
       }],
