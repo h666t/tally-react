@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {EChartOption} from 'echarts';
 import {DataSourceItem} from '../Money';
+import dayjs from 'dayjs';
 const echarts = require('echarts');
 
 const EchartWraper = styled.div`
@@ -34,9 +35,62 @@ const EchartPart:React.FC<Props> = (props) => {
   }
   const YData = () => {
     const YResult:number[] = []
-    specialDataSource.forEach(item=>YResult.push(parseFloat(item.amount)))
+    const YResultContainer :{date: string,amount: string}[] = []
+    const dateContainer: string[] = []
+    let numberForDateString: 7| 10
+    if (monthOrYear === 'month'){
+      numberForDateString = 10
+    }else if (monthOrYear === 'year'){
+      numberForDateString = 7
+    }
+    specialDataSource.forEach(item=>{
+      if (dateContainer.indexOf(item.date.substring(0,numberForDateString)) < 0){
+        dateContainer.push(item.date.substring(0,numberForDateString))
+      }
+    }) // 获取所有不重复的日期
+
+      dateContainer.forEach(item=>{
+        YResultContainer.push({date:item,amount:'0'})
+        YResultContainer.sort((a,b)=>{
+          if (a.date > b.date){
+            return 1
+          }else if (a.date < b.date){
+            return  -1
+          }else {
+            return 0
+          }
+        })
+      })
+
+    YResultContainer.forEach(item=>{
+      let amount = 0
+      specialDataSource.map(x=>{
+        if (x.date.indexOf(item.date) >= 0){
+          amount += parseFloat(x.amount)
+        }
+      })
+      item.amount = `${amount}`
+    })
+
+    if (monthOrYear === 'month'){ // 月度的Y轴数据
+      for (let i = 1; i <= dayjs().daysInMonth(); i++){
+        YResult.push(0)
+      }
+        YResultContainer.forEach(item=>{
+          YResult.splice(parseInt(item.date.substring(8,10))-1,1,parseFloat(item.amount))
+        })
+    }
+    if (monthOrYear === 'year'){
+      for (let i = 1; i <= 12; i++){
+        YResult.push(0)
+      }
+      YResultContainer.forEach(item=>{
+        YResult.splice(parseInt(item.date.substring(5,7))-1,1,parseFloat(item.amount))
+      })
+    }
     return YResult
-  }
+    }
+
   let option: EChartOption
   useEffect(()=>{
     myChart = echarts.init(document.getElementById('main'));
