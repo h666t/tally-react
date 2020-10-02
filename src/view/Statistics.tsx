@@ -59,8 +59,8 @@ const StatisticsWrapper = styled.div`
 const Statistics:React.FC = () => {
   const [isShowYearScreen,setIsShowYearScreen] = useState<'true' | 'false'>('true')
   const thisMonth = `${dayjs().format('YYYY年MM月')}`
-  const inputAmount = fetchSpecialTimeAmount('+',thisMonth).toFixed(2)
-  const outputAmount = fetchSpecialTimeAmount('-',thisMonth).toFixed(2)
+  const inputAmount = fetchSpecialTimeAmount('+',dayjs().format('YYYY-MM')).toFixed(2)
+  const outputAmount = fetchSpecialTimeAmount('-',dayjs().format('YYYY-MM')).toFixed(2)
   const [echartCategory,setEchartCategory] = useState<'+' | '-'>('-')
   const [monthOrYear,setMonthOrYear] = useState<'month' | 'year'>('month')
   const [beSelectedYear,setBeSelectedYear] = useState(dayjs().format('YYYY-MM'))
