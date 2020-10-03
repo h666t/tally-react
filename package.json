@@ -1,7 +1,7 @@
 {
   "name": "tally-react",
   "version": "0.1.0",
-  "homepage": "https://h666t.github.io/tally-react-PRODUCTION/",
+  "homepage": "http://h666t.github.io/tally-react-PRODUCTION/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
