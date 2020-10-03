@@ -40,14 +40,21 @@ const useTags = ()=>{
     }
   }
 
-  const findTagName = (idString: string) => {
-    const id = parseInt(idString)
-    let name
-    tags.forEach(t=>{
-      if (t.id === id){
-        name = t.name
-      }
-    })
+  const findTagName = (arr: number[] | number) => {
+    let name: string[] = []
+    if (arr instanceof Array){
+      tags.map(item=>{
+        if (arr.indexOf(item.id)>=0){
+          name.push(item.name)
+        }
+      })
+    }else {
+      tags.forEach(item=>{
+        if (item.id === arr){
+          name.push(item.name)
+        }
+      })
+    }
     return name
   }
 

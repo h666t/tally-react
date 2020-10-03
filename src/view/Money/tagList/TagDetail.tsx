@@ -40,7 +40,7 @@ const TagDetail = ()=> {
   const history = useHistory()
   const {findTagName,updateTag,removeTag} = useTags()
   const {id} = useParams<Params>();
-  const preTagName = findTagName(id)
+  const preTagName = findTagName(parseInt(id))
   const [newTagName,setNewTagName] = useState<string>('')
   const onClick = (fn:()=>void) => {
     return ()=>{

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {fetchSpecialDataSource} from '../../lib/fetchSpecialDataSource';
 import dayjs from 'dayjs';
+import {useTags} from '../../hook/useTags';
 
 const DetailListWrapper = styled.ul`
     display: flex;
@@ -35,6 +36,7 @@ const DetailListWrapper = styled.ul`
 `
 
 const RecordDetailList = () => {
+  const {findTagName} = useTags()
   const todayRecordsList = fetchSpecialDataSource(`${dayjs().format('YYYY-MM-DD')}`,'both')
   return (
     <DetailListWrapper>
@@ -42,7 +44,7 @@ const RecordDetailList = () => {
         return (
           <li>
         <div>
-          <span>{item.beSelectedTags}</span>
+          <span>{findTagName(item.beSelectedTags).join('，')}</span>
         <span>{item.note}</span>
         </div>
             <div>
