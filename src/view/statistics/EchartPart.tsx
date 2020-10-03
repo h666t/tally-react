@@ -5,7 +5,7 @@ import {DataSourceItem} from '../Money';
 import dayjs from 'dayjs';
 const echarts = require('echarts');
 
-const EchartWraper = styled.div`
+const EchartWrapper = styled.div`
    >#main{
     width: 100vw;
     height: 500px;
@@ -15,11 +15,13 @@ const EchartWraper = styled.div`
 type Props = {
   monthOrYear: 'month' | 'year'
   specialDataSource: DataSourceItem[]
+  echartCategory: '+'|'-'
+  beSelectedDate: string
 }
 
 const EchartPart:React.FC<Props> = (props) => {
   let myChart = null
-  const {monthOrYear,specialDataSource} = props
+  const {monthOrYear,specialDataSource,echartCategory,beSelectedDate} = props
   const xData = () => {
       const XResult: number[] = []
       if (monthOrYear === 'year'){
@@ -90,21 +92,40 @@ const EchartPart:React.FC<Props> = (props) => {
     }
     return YResult
     }
-
+  const tooltipText = () => {
+    if (monthOrYear === 'month'){
+      return '日'
+    }else if (monthOrYear === 'year'){
+      return '月'
+    }
+  }
+  const titleText = () => {
+    if (monthOrYear === 'month' && echartCategory === '+'){
+      return `${dayjs().format('YYYY年MM月')}收入`
+    }else if (monthOrYear === 'month' && echartCategory === '-'){
+      return `${dayjs().format('YYYY年MM月')}支出`
+    }else if (monthOrYear === 'year' && echartCategory === '+'){
+      return `${beSelectedDate.substring(0,4)}年收入`
+    }else if (monthOrYear === 'year' && echartCategory === '-'){
+      return `${beSelectedDate.substring(0,4)}年支出`
+    }
+  }
   let option: EChartOption
   useEffect(()=>{
     myChart = echarts.init(document.getElementById('main'));
     option =  {
       title:{
-        text:'支出'
+        text:titleText()
       },
-      tooltip: {},
+      tooltip: {
+        formatter: `{b0}${tooltipText()}: {c0}元`
+      },
       xAxis: {
         data: xData()
       },
       yAxis: {},
       series: [{
-        name: '销量',
+        name: '金额',
         type: 'bar',
         data: YData()
       }],
@@ -128,9 +149,9 @@ const EchartPart:React.FC<Props> = (props) => {
     myChart.setOption(option);
   },[monthOrYear,specialDataSource])
   return (
-    <EchartWraper>
+    <EchartWrapper>
       <div id={'main'}> </div>
-    </EchartWraper>
+    </EchartWrapper>
   )
 }
 

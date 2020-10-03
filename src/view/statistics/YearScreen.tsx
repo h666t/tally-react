@@ -30,12 +30,12 @@ const YearScreenWrapper = styled.div`
 `
 
 type Props = {
-  setBeSelectedYear:(year: string)=>void
-  beSelectedYear: string
+  setBeSelectedDate:(year: string)=>void
+  beSelectedDate: string
 }
 
 const YearScreen:React.FC<Props> = (props) => {
-  const {beSelectedYear,setBeSelectedYear} = props
+  const {beSelectedDate,setBeSelectedDate} = props
   const dataSource = JSON.parse(window.localStorage.getItem('dataSource') || '[]')
   const yearsContainer: string[] = []
   dataSource.forEach((item: DataSourceItem)=>{
@@ -53,16 +53,15 @@ const YearScreen:React.FC<Props> = (props) => {
       }
     })
   })
-  useEffect(()=>{console.log(beSelectedYear);})
 
   return (
     <YearScreenWrapper>
       <div className={'preData'}>往年数据</div>
       <ol className={'years'}>
         {yearsContainer.map(item=><li key={item} onClick={(event)=>{
-          setBeSelectedYear((event.target as HTMLLIElement).innerText )
+          setBeSelectedDate((event.target as HTMLLIElement).innerText )
         }}
-        className={beSelectedYear === item ? 'selected' : ''}
+        className={beSelectedDate === item ? 'selected' : ''}
         >{item}</li>)}
       </ol>
     </YearScreenWrapper>

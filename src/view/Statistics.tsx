@@ -63,7 +63,7 @@ const Statistics:React.FC = () => {
   const outputAmount = fetchSpecialTimeAmount('-',dayjs().format('YYYY-MM')).toFixed(2)
   const [echartCategory,setEchartCategory] = useState<'+' | '-'>('-')
   const [monthOrYear,setMonthOrYear] = useState<'month' | 'year'>('month')
-  const [beSelectedYear,setBeSelectedYear] = useState(dayjs().format('YYYY-MM'))
+  const [beSelectedDate,setBeSelectedDate] = useState(dayjs().format('YYYY-MM'))
   const changeEchartCategory = (value: '+' | '-') => {
     setEchartCategory(value)
   }
@@ -74,18 +74,18 @@ const Statistics:React.FC = () => {
   const [specialDataSource,setSpecialDataSource] = useState<DataSourceItem[]>([])
   useEffect(()=>{
     if (monthOrYear === 'month'){
-       setBeSelectedYear(dayjs().format('YYYY-MM'))
+       setBeSelectedDate(dayjs().format('YYYY-MM'))
     }
     setSpecialDataSource(
-      fetchSpecialDataSource(beSelectedYear,echartCategory)
+      fetchSpecialDataSource(beSelectedDate,echartCategory)
     )
-  },[echartCategory,monthOrYear,beSelectedYear])
+  },[echartCategory,monthOrYear,beSelectedDate])
   return (
     <StatisticsWrapper>
       <NavWithBack title={'账单详情'} backPath={'/'}/>
       {isShowYearScreen === 'true' && monthOrYear === 'year' ? <YearScreen
-        setBeSelectedYear={setBeSelectedYear}
-        beSelectedYear={beSelectedYear}
+        setBeSelectedDate={setBeSelectedDate}
+        beSelectedDate={beSelectedDate}
       /> : ''}
           <div className={'screen'}>
             <div className={'dateLine'}>
@@ -116,7 +116,11 @@ const Statistics:React.FC = () => {
           切换{monthOrYear === 'month' ? '月' : '年'}账单
         </span>
       </div>
-      <EchartPart monthOrYear={monthOrYear} specialDataSource={specialDataSource} />
+      <EchartPart monthOrYear={monthOrYear}
+                  specialDataSource={specialDataSource}
+                  echartCategory={echartCategory}
+                  beSelectedDate={beSelectedDate}
+      />
     </StatisticsWrapper>
   )
 }
