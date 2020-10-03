@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {Icon} from '../../../components/Icon';
 import {TypeTagsItem, useTags} from '../../../hook/useTags';
-import { useParams,useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {Button} from '../../../components/Button';
 
 const ListWrapper = styled.div`

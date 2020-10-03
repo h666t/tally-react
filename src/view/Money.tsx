@@ -1,4 +1,4 @@
-import React, {createContext, ReducerAction, ReducerState, useEffect, useReducer, useState} from 'react';
+import React, {createContext, ReducerState, useReducer} from 'react';
 import {Category} from '../components/Category';
 import {Tags} from './Money/Tags';
 import styled from 'styled-components';

@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import {DataSourceItem} from '../view/Money';
 
 const fetchSpecialDataSource = (date: string, category:'+'|'-'|'both') => {

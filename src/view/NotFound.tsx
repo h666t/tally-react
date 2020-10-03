@@ -1,7 +1,6 @@
 import React from 'react';
 import {Center} from '../components/Center';
 import {NavLink} from 'react-router-dom';
-import styled from 'styled-components';
 import {Space} from '../components/Space';
 
 

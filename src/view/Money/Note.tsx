@@ -1,6 +1,5 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
+import React, { useContext} from 'react';
 import styled from 'styled-components';
-import {NoteString} from './Calculator';
 import {TextContext} from '../Money';
 
 const NoteWrapper = styled.label`

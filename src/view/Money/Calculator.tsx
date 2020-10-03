@@ -5,7 +5,7 @@ import {Line} from '../../components/Line';
 import {Note} from './Note';
 import {Date} from './Date';
 import {saveDataSource} from '../../lib/saveDataSource';
-import {DataSourceItem, TextContext} from '../Money';
+import {TextContext} from '../Money';
 
 const CalculatorWrapper = styled.div`
      padding-top: 5px;
