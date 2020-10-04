@@ -36,8 +36,6 @@ const NumberPadOutputWrapper = styled.div`
       font-family: Consolas,monospace;
 `
 
-
-
 export type NoteString = {
   note: string
 }

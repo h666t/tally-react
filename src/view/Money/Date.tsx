@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {TextContext} from '../Money';
 
@@ -19,12 +19,13 @@ const Date:React.FC = ()=>{
   }
   const ref1 = useRef(null);
   const showDate = date.slice(0, 10);
+  useEffect(()=>{console.log(showDate);})
   return (
     <DateWrapper>
       <span>日期：</span>
       <input ref={ref1}
              type={'date'}
-             defaultValue={`${showDate}`}
+             value={`${showDate}`}
              onChange={() => {
                changeDate((ref1.current! as HTMLInputElement).value);
              }}
