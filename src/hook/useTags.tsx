@@ -30,6 +30,12 @@ const useTags = ()=>{
 
     for (let i = 0; i < tags.length; i++){
       if (tags[i].id === id && type === 'update'){ // 更新tag的逻辑
+        const nameContainer:string[] = fetchAllNames()
+        cloneTags.forEach(item=>{nameContainer.push(item.name)})
+        if (nameContainer.indexOf(name) >= 0){ //标签名不能重复
+          alert('标签名重复')
+          break
+        }
         cloneTags.splice(i,1,{id,name})
         setTags(cloneTags)
         break
@@ -38,6 +44,12 @@ const useTags = ()=>{
         setTags(cloneTags)
       }
     }
+  }
+
+  const fetchAllNames = () => {
+    const nameContainer:string[] = []
+    tags.forEach(item=>nameContainer.push(item.name))
+    return nameContainer
   }
 
   const findTagName = (arr: number[] | number) => {
@@ -77,16 +89,15 @@ const useTags = ()=>{
       const id = idCreator()
       if (tags.length === 0 ){ // tags 为空数组时
         setTags([{id,name}])
-      }
-      for (let i = 0; i < tags.length; i++){ // 其他情况
-        if (tags[i].name === name){
+      }else { //其他情况
+        const nameContainer: string[] = fetchAllNames()
+        if (nameContainer.indexOf(name) >= 0){
           alert('标签名重复')
-          break
-        } else {
-          const cloneTags = JSON.parse(JSON.stringify(tags))
-          cloneTags.push({id,name})
-          setTags(cloneTags)
+          return;
         }
+        const cloneTags = JSON.parse(JSON.stringify(tags))
+        cloneTags.push({id,name})
+        setTags(cloneTags)
       }
     }
   }
