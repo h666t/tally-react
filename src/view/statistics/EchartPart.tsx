@@ -8,8 +8,7 @@ const echarts = require('echarts');
 const EchartWrapper = styled.div`
    >#main{
     width: 500%;
-    height: 500px;
-    margin: 15px;
+    height: 350px;
    }
    overflow: auto;
    &::-webkit-scrollbar{

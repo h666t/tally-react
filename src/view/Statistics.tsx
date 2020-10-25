@@ -11,10 +11,13 @@ import {Icon} from '../components/Icon';
 import {YearScreen} from '../view/statistics/YearScreen';
 
 const StatisticsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
   >.screen{
     display: flex;
     flex-direction: column;
-    height: 120px;
+    height: 100px;
     background: white;
     justify-content: center;
     padding-left: 20px;
@@ -53,6 +56,10 @@ const StatisticsWrapper = styled.div`
     margin-bottom: 10px;
     margin-right: 20px;
     color: #0f9570;
+  }
+  >.echartWrapper{
+     max-height: 380px;
+     overflow: scroll;
   }
 `
 
@@ -117,12 +124,15 @@ const Statistics:React.FC = () => {
           切换{monthOrYear === 'month' ? '月' : '年'}账单
         </span>
       </div>
+      <div className={'echartWrapper'}>
         <EchartPart monthOrYear={monthOrYear}
-                       specialDataSource={specialDataSource}
-                       echartCategory={echartCategory}
-                       beSelectedDate={beSelectedDate}
+                    specialDataSource={specialDataSource}
+                    echartCategory={echartCategory}
+                    beSelectedDate={beSelectedDate}
 
-      />
+        />
+      </div>
+
     </StatisticsWrapper>
   )
 }
