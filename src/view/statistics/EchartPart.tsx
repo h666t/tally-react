@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {EChartOption} from 'echarts';
 import {DataSourceItem} from '../Money';
@@ -7,9 +7,18 @@ const echarts = require('echarts');
 
 const EchartWrapper = styled.div`
    >#main{
-    width: 100vw;
+    width: 500%;
     height: 500px;
+    margin: 15px;
    }
+   overflow: auto;
+   &::-webkit-scrollbar{
+   display: none;
+   }
+`
+
+const TitleWrapper = styled.span`
+  margin-left: 15px;
 `
 
 type Props = {
@@ -99,29 +108,15 @@ const EchartPart:React.FC<Props> = (props) => {
       return '月'
     }
   }
-  const titleText = () => {
-    if (monthOrYear === 'month' && echartCategory === '+'){
-      return `${dayjs().format('YYYY年MM月')}收入`
-    }else if (monthOrYear === 'month' && echartCategory === '-'){
-      return `${dayjs().format('YYYY年MM月')}支出`
-    }else if (monthOrYear === 'year' && echartCategory === '+'){
-      return `${beSelectedDate.substring(0,4)}年收入`
-    }else if (monthOrYear === 'year' && echartCategory === '-'){
-      return `${beSelectedDate.substring(0,4)}年支出`
-    }
-  }
   let option: EChartOption
   useEffect(()=>{
     myChart = echarts.init(document.getElementById('main'));
     option =  {
-      title:{
-        text:titleText()
-      },
       tooltip: {
         formatter: `{b0}${tooltipText()}: {c0}元`
       },
       xAxis: {
-        data: xData()
+        data:xData()
       },
       yAxis: {},
       series: [{
@@ -130,28 +125,34 @@ const EchartPart:React.FC<Props> = (props) => {
         data: YData()
       }],
       grid: [{
-        left: '13%',
-        bottom: '18%',
-        right: '0%'
-      }],
-      dataZoom: [{
-        type: 'slider',
-        show: true,
-        xAxisIndex: [0],
-        left: '5%',
-        bottom: 30,
-        start: 0,
-        end: 90 ,
-        minSpan:35,
-        maxSpan:35,
+        left: 50,
+        right: 0,
       }],
     };
     myChart.setOption(option);
   },[monthOrYear,specialDataSource])
+  const [title,setTitle] = useState('')
+  useEffect(()=>{
+    if (monthOrYear === 'month' && echartCategory === '+'){
+            setTitle(`${dayjs().format('YYYY年MM月')}收入`)
+          }else if (monthOrYear === 'month' && echartCategory === '-'){
+            setTitle(`${dayjs().format('YYYY年MM月')}支出`)
+          }else if (monthOrYear === 'year' && echartCategory === '+'){
+            setTitle(`${beSelectedDate.substring(0,4)}年收入`)
+          }else if (monthOrYear === 'year' && echartCategory === '-'){
+            setTitle(`${beSelectedDate.substring(0,4)}年支出`)
+          }
+  },[monthOrYear,echartCategory])
   return (
-    <EchartWrapper>
-      <div id={'main'}> </div>
-    </EchartWrapper>
+    <div>
+      <TitleWrapper>
+      {title}
+      </TitleWrapper>
+      <EchartWrapper>
+        <div  id={'main'}> </div>
+      </EchartWrapper>
+    </div>
+
   )
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NavWithBack} from '../components/NavWithBack';
 import styled from 'styled-components';
 import {Button} from '../components/Button';
@@ -72,6 +72,7 @@ const Statistics:React.FC = () => {
                             : setMonthOrYear('month')
   }
   const [specialDataSource,setSpecialDataSource] = useState<DataSourceItem[]>([])
+  const refEchartWrapper = useRef<null | HTMLDivElement>(null )
   useEffect(()=>{
     if (monthOrYear === 'month'){
        setBeSelectedDate(dayjs().format('YYYY-MM'))
@@ -116,10 +117,11 @@ const Statistics:React.FC = () => {
           切换{monthOrYear === 'month' ? '月' : '年'}账单
         </span>
       </div>
-      <EchartPart monthOrYear={monthOrYear}
-                  specialDataSource={specialDataSource}
-                  echartCategory={echartCategory}
-                  beSelectedDate={beSelectedDate}
+        <EchartPart monthOrYear={monthOrYear}
+                       specialDataSource={specialDataSource}
+                       echartCategory={echartCategory}
+                       beSelectedDate={beSelectedDate}
+
       />
     </StatisticsWrapper>
   )
